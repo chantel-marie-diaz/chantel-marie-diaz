@@ -37,12 +37,12 @@ source ./zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Note the source command must be at the end of ~/.zshrc. from INSTALL.md
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
-echo "source ${(q-)PWD}/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
-#copy manually: 0+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+#add to .zshrc: source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+# https://github.com/marlonrichert/zsh-autocomplete
 
-
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-
+git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git
+#add to zshrc source ~/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+# to update % git -C ~zsh-autocomplete pull
 
 ```
