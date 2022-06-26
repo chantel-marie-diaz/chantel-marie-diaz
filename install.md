@@ -64,7 +64,7 @@ sudo apt install snapd
 To install snapd, simply use the following command:
 
 sudo snap install snapd
-
+snap install pycharm-community --classic.
 
 
 
