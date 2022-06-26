@@ -66,6 +66,12 @@ To install snapd, simply use the following command:
 sudo snap install snapd
 snap install pycharm-community --classic.
 
+# https://linuxhint.com/install_docker_linux_mint/
+sudo apt install docker*
+sudo snap install dbeaver-ce
+curl https://rclone.org/install.sh | sudo bash
 
+# Install py dev env
+apt-get install python-dev-is-python3
 
 ```
