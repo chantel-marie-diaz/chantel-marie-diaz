@@ -45,4 +45,27 @@ git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git
 #add to zshrc source ~/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 # to update % git -C ~zsh-autocomplete pull
 
+sudo apt-get install terminator
+# https://snapcraft.io/install/snapd/mint
+
+
+sudo rm /etc/apt/preferences.d/nosnap.pref
+sudo apt update
+
+#To install snap from the Software Manager application, search for snapd and click Install.
+#Alternatively, snapd can be installed from the command line:
+
+sudo apt update
+sudo apt install snapd
+
+#Either restart your machine, or log out and in again, to complete the installation.
+# Install snapd
+
+To install snapd, simply use the following command:
+
+sudo snap install snapd
+
+
+
+
 ```
