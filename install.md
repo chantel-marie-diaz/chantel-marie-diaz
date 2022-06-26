@@ -27,10 +27,22 @@ sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1
 sudo apt-get update
 sudo apt-get install git
 # git --version
-# optional: $ git config --global user.name "Emma Paris" 
-# git config --global user.email "eparis@atlassian.com"
+git config --global user.name "Emma Paris" 
+git config --global user.email "eparis@atlassian.com"
+
+cd ./zsh
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+echo "source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
+source ./zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Note the source command must be at the end of ~/.zshrc. from INSTALL.md
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+echo "source ${(q-)PWD}/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
+#copy manually: 0+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 
+
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 
 ```
