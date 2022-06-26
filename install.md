@@ -18,7 +18,7 @@ sudo apt install python3.9
 
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1
 
- gcloud debian  ubuntu stuff
+#https://cloud.google.com/sdk/docs/install#deb gcloud debian  ubuntu stuff
 
 
 
