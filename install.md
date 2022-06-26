@@ -74,19 +74,7 @@ curl https://rclone.org/install.sh | sudo bash
 # Install py dev env
 apt-get install python-dev-is-python3
 
-get-pip.py
-
-This is a Python script that uses some bootstrapping logic to install pip.
-
-    Download the script, from https://bootstrap.pypa.io/get-pip.py.
-
-    Open a terminal/command prompt, cd to the folder containing the get-pip.py file and run:
-
-    Linux
-
-python get-pip.py
-
-
+sudo apt install python3-pip
 
 
 ```
