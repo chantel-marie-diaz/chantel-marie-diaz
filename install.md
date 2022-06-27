@@ -75,6 +75,6 @@ curl https://rclone.org/install.sh | sudo bash
 apt-get install python-dev-is-python3
 
 sudo apt install python3-pip
-
+https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
 
 ```
