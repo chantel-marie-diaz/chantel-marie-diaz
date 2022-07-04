@@ -101,6 +101,26 @@ apt-get install fd-find -y
 ln -s $(which fdfind) ~/.local/bin/fd
 
 
+apt-get install fzf -y
+# Install jq
+apt-get install jq -y
+
+# Install copyq
+apt-get install copyq
+
+# Install autojump
+apt-get install autojump -y
+
+# Install tree
+apt-get install tree -y
+
+# Install tree
+apt-get install unzip -y we have it
+
+apt-get install htop -y
+
+# Install tmux
+apt-get install tmux
 
 sudo apt install python3.9-venv
 
