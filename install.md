@@ -79,7 +79,33 @@ https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generati
 
 # download get_pip.py
 
+#gawk is installed 
+
+# Install filezilla
+apt-get install filezilla
+# look a+ alternative maybe to nmap
+
+# Install traceroute
+apt-get install traceroute
+
+# Install vim-gtk
+apt-get install vim-gtk -y
+
+
+# Install figlet
+apt-get install figlet
+
+# Install fd
+apt-get install fd-find -y
+
+ln -s $(which fdfind) ~/.local/bin/fd
+
+
 
 sudo apt install python3.9-venv
+
+
+
+
 
 ```
