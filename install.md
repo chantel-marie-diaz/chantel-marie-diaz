@@ -206,6 +206,9 @@ apt-get install nmap .. we'll see
 sudo apt install python3.9-venv
 
 
+https://github.com/EliverLara/terminator-themes/blob/master/schemes/Gruvbox%20Dark.config
+https://github.com/morhetz/gruvbox
+
 
 
 
