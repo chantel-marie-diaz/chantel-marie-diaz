@@ -122,6 +122,87 @@ apt-get install htop -y
 # Install tmux
 apt-get install tmux
 
+
+# Install postgresl
+apt-get install postgresql-12
+
+apt-get install pgcli
+
+apt-get install xclip already there 
+
+# Install tasking tool
+apt-get install taskwarrior
+
+
+# Install java
+apt-get install default-jre -y already installed 
+
+
+# Clone vundle
+git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim
+
+
+Manually
+
+Clone this repository somewhere ($HOME/.zsh-vi-mode for example)
+
+git clone https://github.com/jeffreytse/zsh-vi-mode.git $HOME/.zsh-vi-mode
+
+Then source it in your .zshrc (or .bashrc)
+
+source $HOME/.zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
+
+# Clone jedi for vim
+git clone --recursive https://github.com/davidhalter/jedi-vim.git ~/.vim/bundle/jedi-vim
+
+
+
+# Install graphviz
+apt-get install graphviz -y
+
+git clone https://github.com/Aloxaf/fzf-tab ~/somewhere
+
+Then add the following line to your ~/.zshrc.
+
+source ~/somewhere/fzf-tab.plugin.zsh
+
+# Install sd
+cargo install sd
+
+# Install tree alternative
+cargo install tre-command
+
+# Install gh
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+apt update
+apt install gh
+
+# Install delta manually # installed differently
+wget $DELTA -O $HOME/Downloads/delta.deb
+dpkg -i $HOME/Downloads/delta.deb
+rm $HOME/Downloads/delta.deb
+
+wget $GO -O $HOME/Downloads/go.tar.gz
+rm -rf /usr/local/go
+tar -C /usr/local -xzf $HOME/Downloads/go.tar.gz
+export PATH=$PATH:/usr/local/go/bin
+
+apt-get install go-md2man -y
+
+git clone https://github.com/vrothberg/vgrep.git
+cd vgrep
+make build GO=/usr/local/go/bin/go
+make install GO=/usr/local/go/bin/go
+cd ..
+
+
+
+# Install nmap
+apt-get install nmap .. we'll see 
+
+
 sudo apt install python3.9-venv
 
 
