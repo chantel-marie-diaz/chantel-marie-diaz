@@ -38,21 +38,8 @@ alias gohome="cd /home/chantel/"
 alias gowork="cd /home/chantel/werk/git"
 alias makevenv="source ./venv/bin/activate"
 #Projects
-alias apollo_uk="cd /home/chantel/werk/git/apollo_uk"
-alias de_utils="cd /home/chantel/werk/git/de_utils"
-alias scanner="cd /home/chantel/werk/git/scanner"
-alias pipeline_tools="cd /home/chantel/werk/git/pipeline-tools"
-alias reporter="cd /home/chantel/werk/git/reporter"
-alias apollo="cd /home/chantel/werk/git/apollo"
-alias de_shared="cd /home/chantel/werk/git/de_shared"
-alias de_webdata="cd /home/chantel/werk/git/de_webdata"
-alias hera="cd /home/chantel/werk/git/hera"
-alias artemis="cd /home/chantel/werk/git/artemis"
-alias forecast="cd /home/chantel/werk/git/forecast"
-alias groundtruth="cd /home/chantel/werk/git/ground-truth-ce"
-alias weather="cd /home/chantel/werk/git/ce-weather"
-alias de_data_quality="cd /home/chantel/werk/git/de_data_quality"
-
+alias apollo_uk=""
+#..and others
 
 
 
