@@ -1,28 +1,29 @@
-
 set nocompatible
-filetype off
+"filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " Plugins
-Plugin 'gmarik/Vundle.vim'
-Plugin 'vim-syntastic/syntastic'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'dense-analysis/ale'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'preservim/nerdtree'
 Plugin 'nvie/vim-flake8'
-Plugin 'davidhalter/jedi-vim', {'pinned': 0.10.0}
-Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-Plugin 'majutsushi/tagbar'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'shmup/vim-sql-syntax'
 Plugin 'mg979/vim-visual-multi', {'branch': 'master'}
 Plugin 'chrisbra/csv.vim'
 Plugin 'https://github.com/airblade/vim-gitgutter'
 Plugin 'https://github.com/tpope/vim-surround'
 Plugin 'https://github.com/tpope/vim-repeat'
-Plugin 'arcticicestudio/nord-vim', { 'name': 'nord' }
-Plugin 'morhetz/gruvbox', {'name' : 'gruvbox'} 
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'puremourning/vimspector'
+Plugin 'morhetz/gruvbox'
 " A few manual steps in https://github.com/iamcco/markdown-preview.nvim
 Plugin 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
@@ -30,12 +31,35 @@ Plugin 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for'
 call vundle#end()
 filetype plugin indent on
 
+"Enable type file detection
+filetype on
+
+"Enable plugins and load plugin for the detected file type
+filetype plugin on
+
+"Load an indent file for the detected filetype
+"filetype indent on
+
+"Add numbers
+set number
+
+"Highlight cursor line
+set cursorline
+
+"Use space characters instead of tab
+"set expandtab
+
 " Syntax highlighting
 let python_highlight_all=1
 syntax on
 
-" Line numbering
-set nu
+
+let g:gruvbox_italic=1
+"let g:gruvbox_contrast_light="soft"
+
+set background=light
+colorscheme gruvbox
+
 
 " Access system clipboard for mac
 if has('macunix')
@@ -45,49 +69,64 @@ else
     set clipboard=unnamedplus
 endif
 
-" Set color scheme
-let g:gruvbox_bold=1
-let g:gruvbox_italic=1
-let g:gruvbox_contrast_dark = 'soft'
-" set background=dark
-colorscheme gruvbox
 
-" Set ctags
-set tags+=$HOME/.ctags/tags
+"While searching through a file incrementally highlight matching characters as you "type.
+set incsearch
 
-" Set no wrap
+"Ignore capital letters during search.
+set ignorecase
+
+"Override to look for capital letters
+set smartcase
+
+"Show partial command you type in the line
+set showcmd
+
+"Show the mode you are on the last line
+set showmode
+
+"Show matching words during a search.
+set showmatch
+
+"Use highlightig when doing a search.
+set hlsearch
+
+"Enable autocompletion
+set wildmenu
+
+"List long
+set wildmode=list:longest
+
+"ignore
+"set wildignore=*.docx, *.jpg, *.png, *.gif, *pdf, *.pyc, *exe, *.flv
+
+"Set no wrap
 set nowrap
-
-" Set split lower
-set splitbelow
-
-" Set file to autoread on open
-set autoread
 
 " Set tabs as 2 spaces
 set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
 
-" Customize keybindings
+let g:ycm_python_interpreter_path = ''
+let g:ycm_python_sys_path = []
+let g:ycm_extra_conf_vim_data = [
+  \  'g:ycm_python_interpreter_path',
+  \  'g:ycm_python_sys_path'
+  \]
+let g:ycm_global_ycm_extra_conf = '~/global_extra_conf.py'
+
 vmap <C-c> y
 vmap <C-x> x
 imap <C-v> <esc>P
-nmap <C-l> :NERDTreeFocusToggle<CR>
 
-nmap <C-k> :wincmd k<CR>
-nmap <C-j> :wincmd j<CR>
-nmap <C-l> :wincmd l<CR>
-nmap <C-h> :wincmd h<CR>
-nmap <C-a> :NERDTreeFocusToggle<CR>
-nmap <F8> :call flake8#Flake8()<CR>
-nmap <F9> :setlocal spell! spelllang=en_us<CR>
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
+autocmd VimEnter * NERDTree | wincmd p
 
 " Keep the most recently pasted item in clipboard
 xnoremap p pgvy
-
-" Autoopen nerdtree
-autocmd VimEnter * NERDTree | wincmd p
-" autocmd FileType python TagbarOpen
-" autocmd FileType python setlocal completeopt-=preview
 
 " Autostart git gutter
 autocmd VimEnter * GitGutter
@@ -116,20 +155,6 @@ function ToggleMouse()
     endif
 endfunction
 
-"" Query db using psql
-"function DBQuery()
-"    let file=expand('%:p')
-"    if file=~'.sql'
-"        let filename='~/Desktop/output.csv'
-"        let arg='psql -A -F"," -f ' . file . ' > ' . filename . ' --pset footer'
-"        call system(arg)
-"        split
-"        exec 'e ' . filename
-"        " exec ':%ArrangeColumn'
-"    endif
-"endfunction
-"command! DBQuery call DBQuery()
-
 " Highlight trailing whitespace
 function HighlightTrailingWhitespace()
   highlight ExtraWhitespace ctermbg=red guibg=red
@@ -137,21 +162,9 @@ function HighlightTrailingWhitespace()
 endfunction
 autocmd VimEnter,BufWritePost * call HighlightTrailingWhitespace()
 
-"" DB dad bod
-"let $DBUI_URL = 'postgresql:'
-"let g:db_ui_env_variable_name = 'PGUSER'
-"let g:db_ui_win_position = 'right'
-
-" Jedi do not popup autocomplete after typing dot
-let g:jedi#popup_on_dot = 0
-let g:jedi#show_call_signatures = "0"
-
 " Show flake8 gutter
 let g:flake8_show_in_gutter=1
 let g:flake8_show_in_file=1
-
-" Yaml lint
-let g:syntastic_yaml_checkers = ['yamllint']
 
 " Patch xterm printing weird chars on line 1
 set t_TI= t_TE=
@@ -203,3 +216,6 @@ function TurnOffSyntaxLongLines()
   set synmaxcol=300
 endfunction
 command! TurnOffSyntaxLongLines call TurnOffSyntaxLongLines()
+
+
+let g:vimspector_enable_mappings = 'HUMAN'
