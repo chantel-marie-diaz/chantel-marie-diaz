@@ -209,7 +209,20 @@ sudo apt install python3.9-venv
 https://github.com/EliverLara/terminator-themes/blob/master/schemes/Gruvbox%20Dark.config
 https://github.com/morhetz/gruvbox
 
-
+#ttps://askubuntu.com/questions/1181334/how-do-i-search-for-a-package # downloading aptget file
+some documentation #ttps://github.com/lifepillar/vim-gruvbox8/blob/master/doc/gruvbox8.txt
+#lookintotmux
+https://github.com/puremourning/vimspector #debugging, have to look into it
+https://itsfoss.com/vim-8-release-install/ updating to latest vim to use debugging tool
+https://github.com/sonph/onehalf/tree/master/vim #another theme i might try, not sure
+# updating fonts https://vimawesome.com/plugin/fonts
+#ttps://powerline.readthedocs.io/en/latest/installation/linux.html#fonts-installation, but better to use install.sh
+https://stackoverflow.com/questions/47956670/how-to-install-plugins-in-vim-using-vundle
+https://github.com/tpope/vim-fugitive #future thought
+https://askubuntu.com/questions/73864/how-to-modify-an-invalid-etc-sudoers-file #help
+https://stackoverflow.com/questions/71901632/fatal-error-unsafe-repository-home-repon-is-owned-by-someone-else issue
+https://vimawesome.com/plugin/fonts #reference
+https://github.com/powerline/fonts to actually get the fonts
 
 
 ```
