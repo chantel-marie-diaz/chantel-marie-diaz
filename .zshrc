@@ -26,7 +26,9 @@ source $HOME/.cargo/env
 alias ls="exa"
 alias dk="docker"
 alias fd="fdfind"
+alias make="sudo make"
 alias g="git"
+alias safegit="sudo git config --system --add safe.directory"
 alias l="exa"
 alias la="exa -a"
 alias ll="exa -l"
@@ -36,7 +38,7 @@ alias pg="pgcli"
 alias v="vim"
 alias gohome="cd /home/chantel/"
 alias gowork="cd /home/chantel/werk/git"
-alias makevenv="source ./venv/bin/activate"
+alias activate="source ./venv/bin/activate"
 #Projects
 alias apollo_uk=""
 #..and others
