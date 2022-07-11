@@ -1,6 +1,7 @@
-# Install zsh
+# Stuff I've downloaded, mostly copy from rbetzler
 
 ```
+## Install zsh
 echo > .zshrc
 sudo apt-get install zsh -y
 chsh -s $(which zsh)
