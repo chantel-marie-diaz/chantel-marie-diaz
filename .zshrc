@@ -23,12 +23,14 @@ PROMPT='%B%m%~%b$(git_super_status) %# '
 
 source $HOME/.cargo/env
 
+#Some Commads
 alias ls="exa"
-alias dk="docker"
+alias dk="sudo docker"
+alias preview="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 alias fd="fdfind"
 alias make="sudo make"
-alias g="git"
 alias safegit="sudo git config --system --add safe.directory"
+alias g="git"
 alias l="exa"
 alias la="exa -a"
 alias ll="exa -l"
@@ -39,11 +41,21 @@ alias v="vim"
 alias gohome="cd /home/chantel/"
 alias gowork="cd /home/chantel/werk/git"
 alias activate="source ./venv/bin/activate"
+
 #Projects
 alias apollo_uk=""
-#..and others
+#...and others
 
+export BAT_THEME="gruvbox-dark"
 
+#vgrep and fzf
+vgrep() {
+  INITIAL_QUERY="$1"
+  VGREP_PREFIX="vgrep --no-header "
+  FZF_DEFAULT_COMMAND="$VGREP_PREFIX '$INITIAL_QUERY'" \
+  fzf --bind "change:reload:$VGREP_PREFIX {q} || true" --ansi --phony --tac --query "$INITIAL_QUERY" \
+  | awk '{print $1}' | xargs -I{} -o vgrep --show {}
+}
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /home/chantel/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
