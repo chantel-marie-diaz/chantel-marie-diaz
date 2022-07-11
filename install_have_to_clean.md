@@ -224,5 +224,7 @@ https://stackoverflow.com/questions/71901632/fatal-error-unsafe-repository-home-
 https://vimawesome.com/plugin/fonts #reference
 https://github.com/powerline/fonts to actually get the fonts
 
+wget https://github.com/sharkdp/bat/releases/download/v0.21.0/bat_0.21.0_amd64.deb 
+sudo dpkg -i bat_0.21.0_amd64.deb
 
 ```
