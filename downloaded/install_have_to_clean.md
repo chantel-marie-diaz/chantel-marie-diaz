@@ -1,4 +1,4 @@
-# Stuff I've downloaded, mostly copy from rbetzler
+# Stuff I've downloaded, mostly copy and paste
 
 ```
 ## Install zsh
