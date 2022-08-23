@@ -1,6 +1,7 @@
 set nocompatible
 "filetype off
 
+" Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -24,6 +25,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'puremourning/vimspector'
 Plugin 'morhetz/gruvbox'
+Plugin 'gryf/pylint-vim'
 " A few manual steps in https://github.com/iamcco/markdown-preview.nvim
 Plugin 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
@@ -38,7 +40,7 @@ filetype on
 filetype plugin on
 
 "Load an indent file for the detected filetype
-"filetype indent on
+filetype indent on
 
 "Add numbers
 set number
@@ -48,27 +50,6 @@ set cursorline
 
 "Use space characters instead of tab
 "set expandtab
-
-" Syntax highlighting
-let python_highlight_all=1
-syntax on
-
-
-let g:gruvbox_italic=1
-"let g:gruvbox_contrast_light="soft"
-
-set background=light
-colorscheme gruvbox
-
-
-" Access system clipboard for mac
-if has('macunix')
-    set clipboard=unnamed
-" Or for linux
-else
-    set clipboard=unnamedplus
-endif
-
 
 "While searching through a file incrementally highlight matching characters as you "type.
 set incsearch
@@ -106,6 +87,45 @@ set nowrap
 " Set tabs as 2 spaces
 set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
 
+" Access system clipboard for mac
+if has('macunix')
+    set clipboard=unnamed
+" Or for linux
+else
+    set clipboard=unnamedplus
+endif
+
+" Syntax highlighting
+let python_highlight_all=1
+syntax on
+
+"Gruvbox
+let g:gruvbox_italic=1
+set background=light
+colorscheme gruvbox
+
+"Ale Linting
+let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 1
+let g:ale_hover_to_preview = 1
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'python': ['black', 'autoflake','isort'],
+\}
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+highlight ALEWarning ctermbg=DarkMagenta ctermfg=white cterm=underline
+highlight ALEError ctermbg=DarkMagenta ctermfg=white  cterm=underline
+highlight ALEErrorLine ctermbg=DarkMagenta ctermfg=white
+highlight ALEErrorSign ctermbg=DarkMagenta ctermfg=white
+
+" Vimspector for Debugging
+let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
+
+
+" You Complete Me
 let g:ycm_python_interpreter_path = ''
 let g:ycm_python_sys_path = []
 let g:ycm_extra_conf_vim_data = [
@@ -118,6 +138,7 @@ vmap <C-c> y
 vmap <C-x> x
 imap <C-v> <esc>P
 
+" Nerd Tree
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
@@ -169,25 +190,6 @@ let g:flake8_show_in_file=1
 " Patch xterm printing weird chars on line 1
 set t_TI= t_TE=
 
-function WritePyBreakpoint()
-  let line=line('.')
-  let indent=indent(line)
-  let pad = repeat(' ', indent)
-  call append(line - 1, pad . 'breakpoint()')
-endfunction
-command! WritePyBreakpoint call WritePyBreakpoint()
-nmap <C-b><C-k> :WritePyBreakpoint<CR>
-
-function RemovePyBreakpoints()
-  exec ':g/breakpoint()/d'
-endfunction
-command! RemovePyBreakpoints call RemovePyBreakpoints()
-
-function RemoveWhiteSpaces()
-  exec ':%s/\s\+$//e'
-endfunction
-command! RemoveWhiteSpaces call RemoveWhiteSpaces()
-
 function GenerateGithubLink()
   " Get the current branch name and string the new line chars
   let branch = substitute(system('git branch --show-current'), '\n\+$', '', '')
@@ -211,11 +213,3 @@ function RebaseViewer()
   exec ':rightbelow vertical ter ' . cmd
 endfunction
 command! RebaseViewer call RebaseViewer()
-
-function TurnOffSyntaxLongLines()
-  set synmaxcol=300
-endfunction
-command! TurnOffSyntaxLongLines call TurnOffSyntaxLongLines()
-
-
-let g:vimspector_enable_mappings = 'HUMAN'
