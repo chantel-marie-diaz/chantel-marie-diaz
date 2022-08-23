@@ -124,7 +124,6 @@ highlight ALEErrorSign ctermbg=DarkMagenta ctermfg=white
 " Vimspector for Debugging
 let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
 
-
 " You Complete Me
 let g:ycm_python_interpreter_path = ''
 let g:ycm_python_sys_path = []
