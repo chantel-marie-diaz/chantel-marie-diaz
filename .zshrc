@@ -6,8 +6,6 @@ export GOOGLE_APPLICATION_CREDENTIALS="/home/chantel/servicekeys/staging.json"
 
 source ~/.zsh/zsh-git-prompt/zshrc.sh
 
-# source /home/chantel/gruvbox-zsh/gruvbox.zsh
-
 source /usr/share/doc/fzf/examples/key-bindings.zsh
 source /usr/share/doc/fzf/examples/completion.zsh
 #source $HOME/.zsh-vi-mode/zsh-vi-mode.plugin.zsh
@@ -56,7 +54,6 @@ alias groundtruth="cd /home/chantel/werk/git/ground-truth-ce"
 alias weather="cd /home/chantel/werk/git/ce-weather"
 alias de_data_quality="cd /home/chantel/werk/git/de_data_quality"
 
-
 export BAT_THEME="Nord"
 
 #vgrep and fzf
@@ -67,9 +64,6 @@ vgrep() {
   fzf --bind "change:reload:$VGREP_PREFIX {q} || true" --ansi --phony --tac --query "$INITIAL_QUERY" \
   | awk '{print $1}' | xargs -I{} -o vgrep --show {}
 }
-
-
-
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /home/chantel/.zsh/zsh-syntax-highlighting/zsh
