@@ -7,11 +7,19 @@
         "name": "<name>: Launch",
         "type": "python",
         "request": "launch",
-        "python": "/usr/bin/python",
+        "cwd": "${workspaceRoot}",
+        "python": "${workspaceRoot}/venv/bin/python",
         "stopOnEntry": true,
         "console": "externalTerminal",
         "debugOptions": [],
         "program": "${file}"
+      },
+      "breakpoints": {
+        "exception": {
+          "raised": "Y",
+          "uncaught": "Y",
+          "userUnhandled": ""
+        }
       }
     }
   }
