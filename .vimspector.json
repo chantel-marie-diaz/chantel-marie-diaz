@@ -1,4 +1,5 @@
 {
+  "_comment": "similar to launch.json, needs to be in every repository",
   "configurations": {
     "<name>: Launch": {
       "adapter": "debugpy",
