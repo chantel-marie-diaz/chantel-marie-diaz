@@ -9,14 +9,14 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'dense-analysis/ale'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'preservim/nerdtree'
 Plugin 'nvie/vim-flake8'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'gryf/pylint-vim'
 Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'shmup/vim-sql-syntax'
 Plugin 'mg979/vim-visual-multi', {'branch': 'master'}
+Plugin 'itchyny/lightline.vim'
+Plugin 'itchyny/vim-gitbranch'
 Plugin 'chrisbra/csv.vim'
 Plugin 'https://github.com/airblade/vim-gitgutter'
 Plugin 'https://github.com/tpope/vim-surround'
@@ -24,10 +24,28 @@ Plugin 'https://github.com/tpope/vim-repeat'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'puremourning/vimspector'
-Plugin 'morhetz/gruvbox'
-Plugin 'gryf/pylint-vim'
+Plugin 'arcticicestudio/nord-vim'
 " A few manual steps in https://github.com/iamcco/markdown-preview.nvim
 Plugin 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plugin 'preservim/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'ryanoasis/vim-devicons'
+
+" Lightline
+let g:lightline = {
+      \ 'colorscheme': 'nord',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'gitbranch#name'
+      \ },
+      \ }
+
+
+" set guifont=DroidSansMono\ Nerd\ Font\ 11
+" set encoding=UTF-8
 
 " Vundle exec
 call vundle#end()
@@ -99,10 +117,9 @@ endif
 let python_highlight_all=1
 syntax on
 
-"Gruvbox
-let g:gruvbox_italic=1
-set background=light
-colorscheme gruvbox
+" Nord
+colorscheme nord
+highlight Comment ctermfg=LightGrey
 
 "Ale Linting
 let g:ale_fix_on_save = 1
@@ -116,10 +133,10 @@ let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
-highlight ALEWarning ctermbg=DarkMagenta ctermfg=white cterm=underline
-highlight ALEError ctermbg=DarkMagenta ctermfg=white  cterm=underline
-highlight ALEErrorLine ctermbg=DarkMagenta ctermfg=white
-highlight ALEErrorSign ctermbg=DarkMagenta ctermfg=white
+highlight ALEWarning ctermbg=DarkMagenta ctermfg=DarkYellow  cterm=underline
+highlight ALEError ctermbg=DarkMagenta ctermfg=DarkYellow  cterm=underline
+highlight ALEErrorLine ctermbg=DarkMagenta ctermfg=DarkYellow
+highlight ALEErrorSign ctermbg=DarkMagenta ctermfg=DarkYellow
 
 " Vimspector for Debugging
 let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
