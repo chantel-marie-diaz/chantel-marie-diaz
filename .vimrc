@@ -30,6 +30,8 @@ Plugin 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for'
 Plugin 'preservim/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'ryanoasis/vim-devicons'
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+
 
 " Lightline
 let g:lightline = {
@@ -42,10 +44,6 @@ let g:lightline = {
       \   'gitbranch': 'gitbranch#name'
       \ },
       \ }
-
-
-" set guifont=DroidSansMono\ Nerd\ Font\ 11
-" set encoding=UTF-8
 
 " Vundle exec
 call vundle#end()
@@ -154,13 +152,44 @@ vmap <C-c> y
 vmap <C-x> x
 imap <C-v> <esc>P
 
-" Nerd Tree
+" NERDTree Mappings
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
+" Start NERDTree and put the cursor back in the other window.
 autocmd VimEnter * NERDTree | wincmd p
+
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" NERDTree and Interface Font, also set in Terminator
+set guifont=Hasklug\ Nerd\ Font\ Mono\ Medium\ 11
+set gfw=Hasklug\ Nerd\ Font\ Mono\ Medium\ 11
+set encoding=UTF-8
+
+" NERDTree Syntax
+let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
+let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
+
+" NERDTree with Git Plugin
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ 'Modified'  :'✹',
+                \ 'Staged'    :'✚',
+                \ 'Untracked' :'♨',
+                \ 'Renamed'   :'➜',
+                \ 'Unmerged'  :'═',
+                \ 'Deleted'   :'✖',
+                \ 'Dirty'     :'✗',
+                \ 'Ignored'   :'☒',
+                \ 'Clean'     :'✔︎',
+                \ 'Unknown'   :'?',
+                \ }
+
+" NERDTree Use NERD Fonts and Untracked
+let g:NERDTreeGitStatusUseNerdFonts = 1
+let g:NERDTreeGitStatusUntrackedFilesMode = 'all' " a heavy feature too. default: normal
 
 " Keep the most recently pasted item in clipboard
 xnoremap p pgvy
