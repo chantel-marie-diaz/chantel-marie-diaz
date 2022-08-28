@@ -33,11 +33,9 @@ Plugin 'arcticicestudio/nord-vim'
 " A few manual steps in https://github.com/iamcco/markdown-preview.nvim
 Plugin 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
-
 " Vundle exec
 call vundle#end()
 filetype plugin indent on
-
 
 " Lightline
 let g:lightline = {
@@ -50,7 +48,6 @@ let g:lightline = {
       \   'gitbranch': 'gitbranch#name'
       \ },
       \ }
-
 
 let g:vimspectorpy#launcher = "xterm"
 
