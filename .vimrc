@@ -24,6 +24,7 @@ Plugin 'https://github.com/tpope/vim-repeat'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'puremourning/vimspector'
+Plugin 'sagi-z/vimspectorpy', { 'do': { -> vimspectorpy#update() } }
 Plugin 'arcticicestudio/nord-vim'
 " A few manual steps in https://github.com/iamcco/markdown-preview.nvim
 Plugin 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
@@ -44,6 +45,10 @@ let g:lightline = {
       \   'gitbranch': 'gitbranch#name'
       \ },
       \ }
+
+
+let g:vimspectorpy#launcher = "xterm"
+
 
 " Vundle exec
 call vundle#end()
