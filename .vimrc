@@ -28,14 +28,16 @@ Plugin 'sagi-z/vimspectorpy', { 'do': { -> vimspectorpy#update() } }
 Plugin 'itchyny/vim-gitbranch'
 Plugin 'dense-analysis/ale'
 Plugin 'nvie/vim-flake8'
-Plugin 'gryf/pylint-vim'
+Plugin 'gryf/pylint-vim' " requires a pip install of pylint on machine + to appear in ale
 Plugin 'arcticicestudio/nord-vim'
 " A few manual steps in https://github.com/iamcco/markdown-preview.nvim
 Plugin 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
+
 " Vundle exec
 call vundle#end()
 filetype plugin indent on
+
 
 " Lightline
 let g:lightline = {
@@ -48,6 +50,7 @@ let g:lightline = {
       \   'gitbranch': 'gitbranch#name'
       \ },
       \ }
+
 
 let g:vimspectorpy#launcher = "xterm"
 
@@ -237,6 +240,15 @@ let g:flake8_show_in_file=1
 
 " Patch xterm printing weird chars on line 1
 set t_TI= t_TE=
+
+" Embed IPython in the code to automatically run in terminal
+function Embed()
+  let line=line('.')
+  let indent=indent(line)
+  let pad = repeat(' ', indent)
+  call append(line - 1, pad . 'from IPython import embed; embed()')
+endfunction
+command! Embed call Embed()
 
 function WritePyBreakpoint()
   let line=line('.')
