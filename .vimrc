@@ -33,11 +33,9 @@ Plugin 'arcticicestudio/nord-vim'
 " A few manual steps in https://github.com/iamcco/markdown-preview.nvim
 Plugin 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
-
 " Vundle exec
 call vundle#end()
 filetype plugin indent on
-
 
 " Lightline
 let g:lightline = {
@@ -50,7 +48,6 @@ let g:lightline = {
       \   'gitbranch': 'gitbranch#name'
       \ },
       \ }
-
 
 let g:vimspectorpy#launcher = "xterm"
 
@@ -125,7 +122,6 @@ colorscheme nord
 highlight Comment ctermfg=LightGrey
 
 "Ale Linting
-" Note add yamllint to ale
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
 let g:ale_hover_to_preview = 1
@@ -133,6 +129,7 @@ let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'python': ['black', 'autoflake','isort'],
 \}
+let g:ale_yaml_yamllint_executable = 'yamllint' " requires pip install of yamllint on machine or virtual environment, like pylint
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
