@@ -7,31 +7,36 @@ call vundle#begin()
 
 " Plugins
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'dense-analysis/ale'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'nvie/vim-flake8'
-Plugin 'gryf/pylint-vim'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'shmup/vim-sql-syntax'
-Plugin 'mg979/vim-visual-multi', {'branch': 'master'}
-Plugin 'itchyny/lightline.vim'
-Plugin 'itchyny/vim-gitbranch'
-Plugin 'chrisbra/csv.vim'
-Plugin 'https://github.com/airblade/vim-gitgutter'
-Plugin 'https://github.com/tpope/vim-surround'
-Plugin 'https://github.com/tpope/vim-repeat'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'puremourning/vimspector'
-Plugin 'sagi-z/vimspectorpy', { 'do': { -> vimspectorpy#update() } }
-Plugin 'arcticicestudio/nord-vim'
-" A few manual steps in https://github.com/iamcco/markdown-preview.nvim
-Plugin 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plugin 'preservim/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'itchyny/lightline.vim'
+Plugin 'shmup/vim-sql-syntax'
+Plugin 'chrisbra/csv.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'mg979/vim-visual-multi', {'branch': 'master'}
+Plugin 'https://github.com/airblade/vim-gitgutter'
+Plugin 'https://github.com/tpope/vim-surround'
+Plugin 'https://github.com/tpope/vim-repeat'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'puremourning/vimspector'
+Plugin 'sagi-z/vimspectorpy', { 'do': { -> vimspectorpy#update() } }
+Plugin 'itchyny/vim-gitbranch'
+Plugin 'dense-analysis/ale'
+Plugin 'nvie/vim-flake8'
+Plugin 'gryf/pylint-vim'
+Plugin 'arcticicestudio/nord-vim'
+" A few manual steps in https://github.com/iamcco/markdown-preview.nvim
+Plugin 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
+
+" Vundle exec
+call vundle#end()
+filetype plugin indent on
 
 
 " Lightline
@@ -48,11 +53,6 @@ let g:lightline = {
 
 
 let g:vimspectorpy#launcher = "xterm"
-
-
-" Vundle exec
-call vundle#end()
-filetype plugin indent on
 
 "Enable type file detection
 filetype on
@@ -125,6 +125,7 @@ colorscheme nord
 highlight Comment ctermfg=LightGrey
 
 "Ale Linting
+" Note add yamllint to ale
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
 let g:ale_hover_to_preview = 1
@@ -239,6 +240,20 @@ let g:flake8_show_in_file=1
 
 " Patch xterm printing weird chars on line 1
 set t_TI= t_TE=
+
+function WritePyBreakpoint()
+  let line=line('.')
+  let indent=indent(line)
+  let pad = repeat(' ', indent)
+  call append(line - 1, pad . 'breakpoint()')
+endfunction
+command! WritePyBreakpoint call WritePyBreakpoint()
+nmap <C-b><C-k> :WritePyBreakpoint<CR>
+
+function RemovePyBreakpoints()
+  exec ':g/breakpoint()/d'
+endfunction
+command! RemovePyBreakpoints call RemovePyBreakpoints()
 
 function GenerateGithubLink()
   " Get the current branch name and string the new line chars
