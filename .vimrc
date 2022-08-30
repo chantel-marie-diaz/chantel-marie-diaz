@@ -20,11 +20,9 @@ Plugin 'mg979/vim-visual-multi', {'branch': 'master'}
 Plugin 'https://github.com/airblade/vim-gitgutter'
 Plugin 'https://github.com/tpope/vim-surround'
 Plugin 'https://github.com/tpope/vim-repeat'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'puremourning/vimspector'
-Plugin 'sagi-z/vimspectorpy', { 'do': { -> vimspectorpy#update() } }
 Plugin 'itchyny/vim-gitbranch'
 Plugin 'dense-analysis/ale'
 Plugin 'nvie/vim-flake8'
@@ -33,9 +31,46 @@ Plugin 'arcticicestudio/nord-vim'
 " A few manual steps in https://github.com/iamcco/markdown-preview.nvim
 Plugin 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
+"Wilder Menu
+if has('nvim')
+  function! UpdateRemotePlugins(...)
+    " Needed to refresh runtime files
+    let &rtp=&rtp
+    UpdateRemotePlugins
+  endfunction
+
+  Plugin 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
+else
+  Plugin 'gelguy/wilder.nvim'
+
+  " To use Python remote plugin features in Vim, can be skipped
+  Plugin 'roxma/nvim-yarp'
+  Plugin 'roxma/vim-hug-neovim-rpc'
+endif
+
 " Vundle exec
 call vundle#end()
 filetype plugin indent on
+
+" Wilder Settings
+call wilder#setup({'modes': [':', '/', '?']})
+
+call wilder#set_option('renderer', wilder#popupmenu_renderer(wilder#popupmenu_border_theme({
+      \ 'highlights': {
+      \   'border': 'Normal',
+      \ },
+      \ 'border': 'rounded',
+      \ })))
+
+call wilder#set_option('renderer', wilder#popupmenu_renderer({
+      \ 'highlighter': wilder#basic_highlighter(),
+      \ 'left': [
+      \   ' ', wilder#popupmenu_devicons(),
+      \ ],
+      \ 'right': [
+      \   ' ', wilder#popupmenu_scrollbar(),
+      \ ],
+      \ }))
 
 " Lightline
 let g:lightline = {
@@ -94,7 +129,7 @@ set hlsearch
 set wildmenu
 
 "List long
-set wildmode=list:longest
+set wildmode=longest
 
 "ignore
 "set wildignore=*.docx, *.jpg, *.png, *.gif, *pdf, *.pyc, *exe, *.flv
@@ -129,7 +164,7 @@ let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'python': ['black', 'autoflake','isort'],
 \}
-let g:ale_yaml_yamllint_executable = 'yamllint' " requires pip install of yamllint on machine or virtual environment, like pylint
+let g:ale_yaml_yamllint_executable = 'yamllint'
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
@@ -142,14 +177,40 @@ highlight ALEErrorSign ctermbg=DarkMagenta ctermfg=DarkYellow
 " Vimspector for Debugging
 let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
 
-" You Complete Me
-let g:ycm_python_interpreter_path = ''
-let g:ycm_python_sys_path = []
-let g:ycm_extra_conf_vim_data = [
-  \  'g:ycm_python_interpreter_path',
-  \  'g:ycm_python_sys_path'
-  \]
-let g:ycm_global_ycm_extra_conf = '~/global_extra_conf.py'
+" Vim Easy Complete
+let g:easycomplete_menu_skin = {
+      \   "buf": {
+      \      "kind":"⚯",
+      \      "menu":"[B]",
+      \    },
+      \   "snip": {
+      \      "kind":"<>",
+      \      "menu":"[S]",
+      \    },
+      \   "dict": {
+      \      "kind":"d",
+      \      "menu":"[D]",
+      \    },
+      \   "tabnine": {
+      \      "kind":"",
+      \    },
+      \ }
+let g:easycomplete_scheme="sharp"
+let g:easycomplete_lsp_type_font = {
+      \ 'text' : '⚯',         'method':'m',    'function': 'f',
+      \ 'constructor' : '≡',  'field': 'f',    'default':'d',
+      \ 'variable' : '𝘤',     'class':'c',     'interface': 'i',
+      \ 'module' : 'm',       'property': 'p', 'unit':'u',
+      \ 'value' : '𝘧',        'enum': 'e',     'keyword': 'k',
+      \ 'snippet': '𝘧',       'color': 'c',    'file':'f',
+      \ 'reference': 'r',     'folder': 'f',   'enummember': 'e',
+      \ 'constant':'c',       'struct': 's',   'event':'e',
+      \ 'typeparameter': 't', 'var': 'v',      'const': 'c',
+      \ 'operator':'o',
+      \ 't':'𝘵',   'f':'𝘧',   'c':'𝘤',   'm':'𝘮',   'u':'𝘶',   'e':'𝘦',
+      \ 's':'𝘴',   'v':'𝘷',   'i':'𝘪',   'p':'𝘱',   'k':'𝘬',   'r':'𝘳',
+      \ 'o':"𝘰",   'l':"𝘭",   'a':"𝘢",   'd':'𝘥',
+      \ }
 
 vmap <C-c> y
 vmap <C-x> x
@@ -193,6 +254,8 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 " NERDTree Use NERD Fonts and Untracked
 let g:NERDTreeGitStatusUseNerdFonts = 1
 let g:NERDTreeGitStatusUntrackedFilesMode = 'all' " a heavy feature too. default: normal
+" Add the following line to your .vimrc file:
+let NERDTreeShowHidden=1
 
 " Keep the most recently pasted item in clipboard
 xnoremap p pgvy
