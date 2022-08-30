@@ -1,5 +1,5 @@
 set nocompatible
-"filetype off
+" filetype off
 
 " Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -15,11 +15,13 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'itchyny/lightline.vim'
 Plugin 'shmup/vim-sql-syntax'
 Plugin 'chrisbra/csv.vim'
+Plugin 'Yggdroot/indentLine'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mg979/vim-visual-multi', {'branch': 'master'}
 Plugin 'https://github.com/airblade/vim-gitgutter'
 Plugin 'https://github.com/tpope/vim-surround'
 Plugin 'https://github.com/tpope/vim-repeat'
+Plugin 'jayli/vim-easycomplete'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'puremourning/vimspector'
@@ -31,7 +33,10 @@ Plugin 'arcticicestudio/nord-vim'
 " A few manual steps in https://github.com/iamcco/markdown-preview.nvim
 Plugin 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
-"Wilder Menu
+" Plugin 'git://git.wincent.com/command-t.git'
+" Plugin 'pedrohdz/vim-yaml-folds' will iterate
+
+" Wilder Menu
 if has('nvim')
   function! UpdateRemotePlugins(...)
     " Needed to refresh runtime files
@@ -52,9 +57,14 @@ endif
 call vundle#end()
 filetype plugin indent on
 
+" Yaml
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+let g:indentLine_char = '⦙'
+let g:indentLine_fileType = ['yaml']
+"set foldlevelstart=20
+
 " Wilder Settings
 call wilder#setup({'modes': [':', '/', '?']})
-
 call wilder#set_option('renderer', wilder#popupmenu_renderer(wilder#popupmenu_border_theme({
       \ 'highlights': {
       \   'border': 'Normal',
@@ -84,57 +94,55 @@ let g:lightline = {
       \ },
       \ }
 
-let g:vimspectorpy#launcher = "xterm"
-
-"Enable type file detection
+" Enable type file detection
 filetype on
 
-"Enable plugins and load plugin for the detected file type
+" Enable plugins and load plugin for the detected file type
 filetype plugin on
 
-"Load an indent file for the detected filetype
+" Load an indent file for the detected filetype
 filetype indent on
 
-"Add numbers
+" Add numbers
 set number
 
-"Highlight cursor line
+" Highlight cursor line
 set cursorline
 
-"Use space characters instead of tab
+" Use space characters instead of tab
 "set expandtab
 
-"While searching through a file incrementally highlight matching characters as you "type.
+" While searching through a file incrementally highlight matching characters as you "type.
 set incsearch
 
-"Ignore capital letters during search.
+" Ignore capital letters during search.
 set ignorecase
 
-"Override to look for capital letters
+" Override to look for capital letters
 set smartcase
 
-"Show partial command you type in the line
+" Show partial command you type in the line
 set showcmd
 
-"Show the mode you are on the last line
+" Show the mode you are on the last line
 set showmode
 
-"Show matching words during a search.
+" Show matching words during a search.
 set showmatch
 
-"Use highlightig when doing a search.
+" Use highlightig when doing a search.
 set hlsearch
 
-"Enable autocompletion
+" Enable autocompletion
 set wildmenu
 
-"List long
+" List long
 set wildmode=longest
 
-"ignore
+" ignore
 "set wildignore=*.docx, *.jpg, *.png, *.gif, *pdf, *.pyc, *exe, *.flv
 
-"Set no wrap
+" Set no wrap
 set nowrap
 
 " Set tabs as 2 spaces
@@ -156,23 +164,26 @@ syntax on
 colorscheme nord
 highlight Comment ctermfg=LightGrey
 
-"Ale Linting
+" Ale Linting
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
 let g:ale_hover_to_preview = 1
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'python': ['black', 'autoflake','isort'],
+\   'python': ['pylint','black', 'autoflake','isort'],
+\    'yaml' : ['yamllint', 'spectral', 'yaml-language-server'],
 \}
-let g:ale_yaml_yamllint_executable = 'yamllint'
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
-highlight ALEWarning ctermbg=DarkMagenta ctermfg=DarkYellow  cterm=underline
-highlight ALEError ctermbg=DarkMagenta ctermfg=DarkYellow  cterm=underline
-highlight ALEErrorLine ctermbg=DarkMagenta ctermfg=DarkYellow
-highlight ALEErrorSign ctermbg=DarkMagenta ctermfg=DarkYellow
+" Potential highlights for Ale
+"highlight ALEWarning ctermbg=DarkMagenta ctermfg=DarkYellow  cterm=underline
+"highlight ALEError ctermbg=DarkMagenta ctermfg=DarkYellow  cterm=underline
+"highlight ALEErrorLine ctermbg=DarkMagenta ctermfg=DarkYellow
+"highlight ALEErrorSign ctermbg=DarkMagenta ctermfg=DarkYellow
 
 " Vimspector for Debugging
 let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
@@ -212,6 +223,7 @@ let g:easycomplete_lsp_type_font = {
       \ 'o':"𝘰",   'l':"𝘭",   'a':"𝘢",   'd':'𝘥',
       \ }
 
+" Copy and Paste
 vmap <C-c> y
 vmap <C-x> x
 imap <C-v> <esc>P
@@ -254,8 +266,7 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 " NERDTree Use NERD Fonts and Untracked
 let g:NERDTreeGitStatusUseNerdFonts = 1
 let g:NERDTreeGitStatusUntrackedFilesMode = 'all' " a heavy feature too. default: normal
-" Add the following line to your .vimrc file:
-let NERDTreeShowHidden=1
+let NERDTreeShowHidden=1 " for those dotfiles
 
 " Keep the most recently pasted item in clipboard
 xnoremap p pgvy
