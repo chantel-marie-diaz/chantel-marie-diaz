@@ -12,7 +12,18 @@ PROMPT='%B%m%~%b$(git_super_status) %# '
 # Fzf
 source /usr/share/doc/fzf/examples/key-bindings.zsh
 source /usr/share/doc/fzf/examples/completion.zsh
-#source /home/chantel/.zsh/fzf-tab/fzf-tab.plugin.zsh
+source /home/chantel/.zsh/fzf-tab/fzf-tab.plugin.zsh
+
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# preview directory's content with exa when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+# switch group using `,` and `.`
+zstyle ':fzf-tab:*' switch-group ',' '.'
 
 #source $HOME/.zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
