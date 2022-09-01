@@ -22,4 +22,7 @@
 [diff]
     colorMoved = default
 [safe]
-	#some directories, not useful without a --system commmand https://stackoverflow.com/questions/71901632/fatal-error-unsafe-repository-home-repon-is-owned-by-someone-else
+    #some directories, not useful without a --system commmand https://stackoverflow.com/questions/71901632/fatal-error-unsafe-repository-home-repon-is-owned-by-someone-else
+
+[include]
+	path = gitalias.txt
