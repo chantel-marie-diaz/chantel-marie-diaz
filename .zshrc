@@ -48,10 +48,10 @@ export PYTHONBREAKPOINT=ipdb.set_trace
 # Some Alias Commands
 alias ls="exa"
 alias bat="batcat"
-alias dk="sudo docker"
+alias dk="docker"
 alias preview="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 alias fd="fdfind"
-alias make="sudo make"
+alias make="make"
 alias safegit="sudo git config --system --add safe.directory"
 alias g="git"
 alias l="exa"
@@ -63,7 +63,7 @@ alias pg="pgcli"
 alias v="vim"
 alias gohome="cd /home/chantel/"
 alias gowork="cd /home/chantel/werk/"
-alias create="python -m venv venv"
+alias create="python3.9 -m venv venv"
 alias activate="source ./venv/bin/activate"
 
 # Projects
@@ -97,6 +97,7 @@ vgrep() {
   fzf --bind "change:reload:$VGREP_PREFIX {q} || true" --ansi --phony --tac --query "$INITIAL_QUERY" \
   | awk '{print $1}' | xargs -I{} -o vgrep --show {}
 }
+
 
 # Zsh Autosuggestions and Syntax Highlighting
 source /home/chantel/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
