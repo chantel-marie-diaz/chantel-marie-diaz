@@ -17,6 +17,10 @@ Plugin 'shmup/vim-sql-syntax'
 Plugin 'chrisbra/csv.vim'
 Plugin 'Yggdroot/indentLine'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'tyru/open-browser.vim'
+Plugin 'tyru/open-browser-github.vim'
+Plugin 'paulkass/jira-vim'
+Plugin 'Konfekt/vim-alias'
 Plugin 'mg979/vim-visual-multi', {'branch': 'master'}
 Plugin 'https://github.com/airblade/vim-gitgutter'
 Plugin 'https://github.com/tpope/vim-surround'
@@ -33,7 +37,6 @@ Plugin 'arcticicestudio/nord-vim'
 " A few manual steps in https://github.com/iamcco/markdown-preview.nvim
 Plugin 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
-" Plugin 'git://git.wincent.com/command-t.git'
 " Plugin 'pedrohdz/vim-yaml-folds' will iterate
 
 " Wilder Menu
@@ -222,6 +225,11 @@ let g:easycomplete_lsp_type_font = {
       \ 's':'𝘴',   'v':'𝘷',   'i':'𝘪',   'p':'𝘱',   'k':'𝘬',   'r':'𝘳',
       \ 'o':"𝘰",   'l':"𝘭",   'a':"𝘢",   'd':'𝘥',
       \ }
+
+" Ultisnips Triggers
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Copy and Paste
 vmap <C-c> y
