@@ -9,6 +9,14 @@ export GOOGLE_APPLICATION_CREDENTIALS="/home/chantel/servicekeys/staging.json"
 source ~/.zsh/zsh-git-prompt/zshrc.sh
 PROMPT='%B%m%~%b$(git_super_status) %# '
 
+# Patch iconsistent bat, batcat naming
+if ! type bat &>/dev/null ; then
+  alias bat="batcat"
+fi
+
+# Do not remove slash from dir
+setopt no_auto_remove_slash
+
 # Fzf
 source /usr/share/doc/fzf/examples/key-bindings.zsh
 source /usr/share/doc/fzf/examples/completion.zsh
@@ -51,8 +59,7 @@ alias bat="batcat"
 alias dk="docker"
 alias preview="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 alias fd="fdfind"
-alias make="make"
-alias safegit="sudo git config --system --add safe.directory"
+alias safegit="git config --system --add safe.directory"
 alias g="git"
 alias l="exa"
 alias la="exa -a"
@@ -97,7 +104,6 @@ vgrep() {
   fzf --bind "change:reload:$VGREP_PREFIX {q} || true" --ansi --phony --tac --query "$INITIAL_QUERY" \
   | awk '{print $1}' | xargs -I{} -o vgrep --show {}
 }
-
 
 # Zsh Autosuggestions and Syntax Highlighting
 source /home/chantel/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
