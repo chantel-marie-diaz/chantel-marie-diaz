@@ -17,14 +17,15 @@ Plugin 'shmup/vim-sql-syntax'
 Plugin 'chrisbra/csv.vim'
 Plugin 'Yggdroot/indentLine'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'brooth/far.vim'
 Plugin 'tyru/open-browser.vim'
 Plugin 'tyru/open-browser-github.vim'
-Plugin 'paulkass/jira-vim'
 Plugin 'Konfekt/vim-alias'
 Plugin 'mg979/vim-visual-multi', {'branch': 'master'}
 Plugin 'https://github.com/airblade/vim-gitgutter'
 Plugin 'https://github.com/tpope/vim-surround'
 Plugin 'https://github.com/tpope/vim-repeat'
+Plugin 'https://github.com/tpope/vim-commentary'
 Plugin 'jayli/vim-easycomplete'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
@@ -109,6 +110,9 @@ filetype indent on
 " Add numbers
 set number
 
+" Spelling for my typos
+set spell spelllang=en_us
+
 " Highlight cursor line
 set cursorline
 
@@ -173,8 +177,7 @@ let g:ale_completion_enabled = 1
 let g:ale_hover_to_preview = 1
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'python': ['pylint','black', 'autoflake','isort'],
-\    'yaml' : ['yamllint', 'spectral', 'yaml-language-server'],
+\   'python': ['black', 'autoflake','isort'],
 \}
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
