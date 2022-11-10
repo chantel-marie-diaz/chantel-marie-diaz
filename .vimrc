@@ -39,7 +39,6 @@ Plugin 'arcticicestudio/nord-vim'
 " A few manual steps in https://github.com/iamcco/markdown-preview.nvim
 Plugin 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
-
 " Wilder Menu
 if has('nvim')
   function! UpdateRemotePlugins(...)
@@ -60,14 +59,6 @@ endif
 " Vundle exec
 call vundle#end()
 filetype plugin indent on
-
-
-" Press F4 to toggle highlighting on/off, and show current value.
-:noremap <F4> :set hlsearch! hlsearch?<CR>
-
-"Or, press return to temporarily get out of the highlighted search":
-
-:nnoremap <CR> :nohlsearch<CR><CR>
 
 " Yaml
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
@@ -144,8 +135,14 @@ set showmode
 " Show matching words during a search.
 set showmatch
 
-" Use highlightig when doing a search.
+" Use highlighting when doing a search.
 set hlsearch
+
+" To toggle highlights, press F4 to toggle highlighting on/off, and show current value.
+:noremap <F4> :set hlsearch! hlsearch?<CR>
+
+"Or to get out of toggle, press return to temporarily get out of the highlighted search":
+:nnoremap <CR> :nohlsearch<CR><CR>
 
 " Enable autocompletion
 set wildmenu
@@ -191,12 +188,6 @@ let g:ale_sign_warning = '⚠'
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-
-" Potential highlights for Ale
-"highlight ALEWarning ctermbg=DarkMagenta ctermfg=DarkYellow  cterm=underline
-"highlight ALEError ctermbg=DarkMagenta ctermfg=DarkYellow  cterm=underline
-"highlight ALEErrorLine ctermbg=DarkMagenta ctermfg=DarkYellow
-"highlight ALEErrorSign ctermbg=DarkMagenta ctermfg=DarkYellow
 
 " Vimspector for Debugging
 let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
