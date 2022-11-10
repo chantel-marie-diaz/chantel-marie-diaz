@@ -9,11 +9,6 @@ export GOOGLE_APPLICATION_CREDENTIALS="/home/chantel/servicekeys/staging.json"
 source ~/.zsh/zsh-git-prompt/zshrc.sh
 PROMPT='%B%m%~%b$(git_super_status) %# '
 
-# Patch iconsistent bat, batcat naming
-if ! type bat &>/dev/null ; then
-  alias bat="batcat"
-fi
-
 # Do not remove slash from dir
 setopt no_auto_remove_slash
 
@@ -26,12 +21,8 @@ source /home/chantel/.zsh/fzf-tab/fzf-tab.plugin.zsh
 zstyle ':completion:*:git-checkout:*' sort false
 # set descriptions format to enable group support
 zstyle ':completion:*:descriptions' format '[%d]'
-# set list-colors to enable filename colorizing
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # preview directory's content with exa when completing cd
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
-# switch group using `,` and `.`
-zstyle ':fzf-tab:*' switch-group ',' '.'
 
 #source $HOME/.zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
@@ -55,7 +46,6 @@ export PYTHONBREAKPOINT=ipdb.set_trace
 
 # Some Alias Commands
 alias ls="exa"
-alias bat="batcat"
 alias dk="docker"
 alias preview="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 alias fd="fdfind"
