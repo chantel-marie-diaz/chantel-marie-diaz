@@ -33,12 +33,12 @@ Plugin 'puremourning/vimspector'
 Plugin 'itchyny/vim-gitbranch'
 Plugin 'dense-analysis/ale'
 Plugin 'nvie/vim-flake8'
+Plugin 'pedrohdz/vim-yaml-folds'
 Plugin 'gryf/pylint-vim' " requires a pip install of pylint on machine + to appear in ale
 Plugin 'arcticicestudio/nord-vim'
 " A few manual steps in https://github.com/iamcco/markdown-preview.nvim
 Plugin 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
-" Plugin 'pedrohdz/vim-yaml-folds' will iterate
 
 " Wilder Menu
 if has('nvim')
@@ -61,11 +61,18 @@ endif
 call vundle#end()
 filetype plugin indent on
 
+
+" Press F4 to toggle highlighting on/off, and show current value.
+:noremap <F4> :set hlsearch! hlsearch?<CR>
+
+"Or, press return to temporarily get out of the highlighted search":
+
+:nnoremap <CR> :nohlsearch<CR><CR>
+
 " Yaml
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 let g:indentLine_char = '⦙'
 let g:indentLine_fileType = ['yaml']
-"set foldlevelstart=20
 
 " Wilder Settings
 call wilder#setup({'modes': [':', '/', '?']})
@@ -345,20 +352,6 @@ function RemovePyBreakpoints()
   exec ':g/breakpoint()/d'
 endfunction
 command! RemovePyBreakpoints call RemovePyBreakpoints()
-
-function GenerateGithubLink()
-  " Get the current branch name and string the new line chars
-  let branch = substitute(system('git branch --show-current'), '\n\+$', '', '')
-  " Get the current repo url, parse it
-  let url = system('git config --get remote.origin.url')
-  let raw_repo_root = split(url, ":")[1]
-  let repo_root = split(raw_repo_root, ".git")[0]
-  let file_name = @%
-  let line_nbr = line(".")
-  " Print full github url
-  echo 'https://github.com/' . repo_root . '/blob/' . branch . '/' . file_name . '#L' . line_nbr
-endfunction
-command! GenerateGithubLink call GenerateGithubLink()
 
 " Git show the hash under the cursor
 " when doing an interactive rebase
