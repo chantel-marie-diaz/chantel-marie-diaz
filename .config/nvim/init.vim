@@ -40,21 +40,13 @@ Plugin 'arcticicestudio/nord-vim' " for nice aesthetics
 Plugin 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 " Wilder Menu, a More Fancier wildmode.
-if has('nvim')
-  function! UpdateRemotePlugins(...)
+function! UpdateRemotePlugins(...)
     " Needed to refresh runtime files
     let &rtp=&rtp
     UpdateRemotePlugins
   endfunction
 
   Plugin 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
-else
-  Plugin 'gelguy/wilder.nvim'
-
-  " To use Python remote plugin features in Vim, can be skipped
-  Plugin 'roxma/nvim-yarp'
-  Plugin 'roxma/vim-hug-neovim-rpc'
-endif
 
 " Vundle Exec.
 call vundle#end()
@@ -360,4 +352,3 @@ function RebaseViewer()
   echo cmd
   exec ':rightbelow vertical ter ' . cmd
 endfunction
-command! RebaseViewer call RebaseViewer()

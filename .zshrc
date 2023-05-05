@@ -88,10 +88,13 @@ alias pg="pgcli"
 alias v="nvim"
 alias gohome="cd /home/chantel/"
 alias gowork="cd /home/chantel/werk/"
+alias gozshrc= "cd /home/chantel/.zshrc"
+alias goinitvm="cd /home/chantel/.config/nvim/init.vim"
 alias create="python3.9 -m venv venv"
 alias activate="source ./venv/bin/activate"
 
 # Projects
+alias myrepo="cd /home/chantel/werk/chantel-marie-diaz"
 alias apollo_uk="cd /home/chantel/werk/products/apollo_uk"
 alias de_utils="cd /home/chantel/werk/de_utils"
 alias scanner="cd /home/chantel/werk/products/scanner"
