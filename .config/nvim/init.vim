@@ -37,7 +37,7 @@ Plugin 'nvie/vim-flake8' " runs flake8 in vim
 Plugin 'pedrohdz/vim-yaml-folds' " creates folds in yaml file to open and close different sections
 Plugin 'arcticicestudio/nord-vim' " for nice aesthetics
 " A few manual steps in https://github.com/iamcco/markdown-preview.nvim
-Plugin 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plugin 'iamcco/markdown-preview.nvim'
 
 " Wilder Menu, a More Fancier wildmode.
 function! UpdateRemotePlugins(...)
@@ -352,3 +352,4 @@ function RebaseViewer()
   echo cmd
   exec ':rightbelow vertical ter ' . cmd
 endfunction
+command! RebaseViewer call RebaseViewer()
