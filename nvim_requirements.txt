@@ -1,0 +1,7 @@
+python-jsonrpc-server==0.4.0
+python-language-server==0.36.2
+yarp==0.4.0
+
+# For ale to work, uncomment as needed for your env
+# yamllint==1.27.1
+# pylint==2.15.0
