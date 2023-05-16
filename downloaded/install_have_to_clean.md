@@ -257,9 +257,12 @@ sudo unzip $HOME/Downloads/Hasklig.zip -d /usr/local/share/fonts
 sudo hostnamectl hostname chantel
 ```
 
-# Install neovim
+# Install neovim and dependencies
 ```
 sudo apt-get install neovim
-sudo apt-get install npm
+# sudo apt-get install -y nodejs
+sudo apt-get install -y \
+  nodejs \
+  npm
 ```
 
