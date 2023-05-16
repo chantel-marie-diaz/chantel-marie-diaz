@@ -39,14 +39,30 @@ Plugin 'arcticicestudio/nord-vim' " for nice aesthetics
 " A few manual steps in https://github.com/iamcco/markdown-preview.nvim
 Plugin 'iamcco/markdown-preview.nvim'
 
-" Wilder Menu, a More Fancier wildmode.
-function! UpdateRemotePlugins(...)
+if has('nvim')
+  function! UpdateRemotePlugins(...)
     " Needed to refresh runtime files
     let &rtp=&rtp
     UpdateRemotePlugins
   endfunction
 
   Plugin 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
+else
+  Plugin 'gelguy/wilder.nvim'
+
+  " To use Python remote plugin features in Vim, can be skipped
+  Plugin 'roxma/nvim-yarp'
+  Plugin 'roxma/vim-hug-neovim-rpc'
+endif
+
+" " Wilder Menu, a More Fancier wildmode.
+" function! UpdateRemotePlugins(...)
+"     " Needed to refresh runtime files
+"     let &rtp=&rtp
+"     UpdateRemotePlugins
+"   endfunction
+
+"   Plugin 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
 
 " Vundle Exec.
 call vundle#end()
