@@ -264,5 +264,42 @@ sudo apt-get install neovim
 sudo apt-get install -y \
   nodejs \
   npm
+mkdir ./.config/nvim/
+nvim +PluginInstall +qall
 ```
+# Install git super status
+```
+cd /.zsh
+git clone https://github.com/olivierverdier/zsh-git-prompt.git
+```
+
+# Install Minikube
+```
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+```
+# Install Pulumi
+```
+curl -fsSL https://get.pulumi.com | sh
+```
+# Service keys
+```
+mkdir servicekeys
+```
+
+# Install gcloud cli
+```
+#apt-key is deprecated, see other options when time comes
+sudo apt-get install apt-transport-https ca-certificates gnupg
+echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+gcloud init # more of a placeholder
+# pick project number for stage-boat and region 1
+```
+
+# Install kubectl
+```
+sudo apt-get install kubectl
+```
+
 
