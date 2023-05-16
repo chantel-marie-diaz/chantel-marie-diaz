@@ -252,5 +252,14 @@ wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.1/Hasklig.zi
 sudo unzip $HOME/Downloads/Hasklig.zip -d /usr/local/share/fonts
 #
 ```
+# Changing terminal to my name
+```
+sudo hostnamectl hostname chantel
+```
 
+# Install neovim
+```
+sudo apt-get install neovim
+sudo apt-get install npm
+```
 
