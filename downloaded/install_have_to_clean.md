@@ -8,7 +8,8 @@ chsh -s $(which zsh)
 ```
 
 # Install terminator
-```sudo apt-get install terminator
+```
+sudo apt-get install terminator
 ```
 
 # Install python3.9
@@ -131,6 +132,12 @@ apt-get install fd-find -y
 apt-get install fzf -y
 ```
 
+# Install fzf-tab
+```
+cd /.zsh
+git clone https://github.com/Aloxaf/fzf-tab ~/.zsh
+```
+
 # Install jq
 ```
 apt-get install jq -y
@@ -183,3 +190,20 @@ apt-get install taskwarrior
 ```
 apt-get install default-jre -y
 ```
+
+# Install graphviz
+```
+apt-get install graphviz -y
+```
+
+# Install vundle
+```
+git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim
+```
+
+# Install bat
+```
+sudo apt-get install bat -y
+```
+# Download exa, delta manually
+
