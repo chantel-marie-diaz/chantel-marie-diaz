@@ -302,4 +302,11 @@ gcloud init # more of a placeholder
 sudo apt-get install kubectl
 ```
 
+# Install fast syntax highlighting
+
+```
+https://github.com/zdharma-continuum/fast-syntax-highlighting
+
+```
+
 
