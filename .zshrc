@@ -1,5 +1,24 @@
-# Zsh Autocomplete
-source /home/chantel/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
+export EDITOR="nvim"
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# ZSH_THEME="robbyrussell"
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git aws docker docker-compose fzf-tab kubectl minikube zsh-autosuggestions fast-syntax-highlighting zsh-interactive-cd zsh-system-clipboard)
+
+source $ZSH/oh-my-zsh.sh
 
 # Staging File
 export PATH=$PATH:/usr/local/go/bin
@@ -15,42 +34,6 @@ PROMPT='%B%m%~%b$(git_super_status) %# '
 
 # Do not remove slash from dir
 setopt no_auto_remove_slash
-
-# Fzf
-source /usr/share/doc/fzf/examples/key-bindings.zsh
-source /usr/share/doc/fzf/examples/completion.zsh
-source /home/chantel/.zsh/fzf-tab/fzf-tab.plugin.zsh
-
-# load library functions
-source /home/chantel/.zsh/zsh-ls-colors/ls-colors.zsh '' fmt
-
-# Same as :completion:* list-colors
-# Uses LS_COLORS format
-#zstyle $pattern list-colors ${(s[:])LS_COLORS} '*.ext=1'
-
-# disable sort when completing `git checkout`
-zstyle ':completion:*:git-checkout:*' sort false
-# set descriptions format to enable group support
-zstyle ':completion:*:descriptions' format '[%d]'
-# preview directory's content with exa when completing cd
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
-# switch group using `,` and `.`
-zstyle ':fzf-tab:*' switch-group ',' '.'
-#zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-# Same as :completion:* list-colors
-zstyle '*' list-colors "${(@s[:])LS_COLORS}" '*.md=35'
-
-# emable extendedglob under certain contexts:
-zstyle ':demo:other-context' list-colors-extended true
-
-# set extra definitions in certain contexts:
-zstyle ':demo:other-context' list-colors "${(@s[:])LS_COLORS}" '*.md=35' '(#i)(*/|)license(|.*)=04'
-# (underline LICENSE, or license.txt, or similar)
-
-# set custom format in certain contexts:
-zstyle ':demo:other-context' list-format '%F%P%r%(h.%I%i. ➤ %L%l%r)'
-zstyle ':demo:other-context:yet-another-context' list-format $'%F\e[7m\ue0b0%P\e[0m%F\ue0b0%r%(h.. (%L%l%r%))'
-#source $HOME/.zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 # Autojump
 . /usr/share/autojump/autojump.sh
@@ -69,7 +52,6 @@ chpwd() {
 # Use ipdb when python comes across breakpoint()
 # in a file
 export PYTHONBREAKPOINT=ipdb.set_trace
-
 
 # Some Alias Commands
 alias ls="exa"
@@ -113,7 +95,6 @@ alias weather="cd /home/chantel/werk/products/weather"
 alias airflow_utils="cd /home/chantel/werk/products/ce_airflow_utils"
 alias combined="cd /home/chantel/werk/products/combined"
 
-
 # Bat with Nord
 export BAT_THEME="Nord"
 
@@ -132,12 +113,11 @@ vgrep() {
 }
 
 # Zsh Autosuggestions and Syntax Highlighting
-source /home/chantel/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /home/chantel/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /home/chantel/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source /home/chantel/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # add Pulumi to the PATH
 export PATH=$PATH:$HOME/.pulumi/bin
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Shortcut to copy entire zsh register into clipboard
+bindkey -M vicmd 'yy' zsh-system-clipboard-vicmd-vi-yank-whole-line
