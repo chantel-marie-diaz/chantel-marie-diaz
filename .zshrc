@@ -92,7 +92,7 @@ alias artemis="cd /home/chantel/werk/products/artemis"
 alias forecast="cd /home/chantel/werk/products/forecast"
 alias groundtruth="cd /home/chantel/werk/products/ground_truth"
 alias weather="cd /home/chantel/werk/products/weather"
-alias airflow_utils="cd /home/chantel/werk/products/ce_airflow_utils"
+alias airflow_utils="cd /home/chantel/werk/ce_airflow_utils"
 alias combined="cd /home/chantel/werk/products/combined"
 
 # Bat with Nord
