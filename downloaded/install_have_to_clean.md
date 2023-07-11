@@ -309,4 +309,13 @@ https://github.com/zdharma-continuum/fast-syntax-highlighting
 
 ```
 
+# Install sops
+
+```
+# Download sops
+sudo dpkg -i sops_3.7.3_amd64.deb
+sudo apt-get install -f
+```
+
+
 
