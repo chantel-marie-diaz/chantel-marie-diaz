@@ -316,6 +316,11 @@ https://github.com/zdharma-continuum/fast-syntax-highlighting
 sudo dpkg -i sops_3.7.3_amd64.deb
 sudo apt-get install -f
 ```
-
+# Install kubeseal
+```
+wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.22.0/kubeseal-0.22.0-linux-amd64.tar.gz
+tar xfz kubeseal-0.22.0-linux-amd64.tar.gz
+sudo install -m 755 kubeseal /usr/local/bin/kubeseal
+```
 
 
