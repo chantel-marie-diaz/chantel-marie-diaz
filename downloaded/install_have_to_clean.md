@@ -336,4 +336,7 @@ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
 ```
-
+# Install pulumi
+```
+curl -fsSL https://get.pulumi.com | sh
+```
