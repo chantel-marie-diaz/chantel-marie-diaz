@@ -245,6 +245,7 @@ sudo apt install ~/Downloads/warp-terminal_0.2025.09.17.08.11.stable.02_amd64.de
 cd ./.werk
 mkdir ./.werk
 # git config --system --add safe.directory insert/name/of/directory
+git clone git@github.com:chantel-marie-diaz/chantel-marie-diaz.git
 # healthcare
 git clone org-42072952@github.com:EarnestResearch/dset-healthcare387.git
 git clone org-42072952@github.com:EarnestResearch/dset-healthcare674.git
