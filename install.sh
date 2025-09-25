@@ -232,6 +232,7 @@ sudo apt install snapd -y
 sudo snap install slack
 
 # Install zoom, needs package downloaded first
+# https://zoom.us/download?os=linux
 sudo apt update
 sudo apt install ~/Downloads/zoom_amd64.deb -y
 
