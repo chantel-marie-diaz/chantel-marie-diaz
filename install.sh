@@ -250,6 +250,7 @@ git clone git@github.com:chantel-marie-diaz/chantel-marie-diaz.git
 git clone org-42072952@github.com:EarnestResearch/dset-healthcare387.git
 git clone org-42072952@github.com:EarnestResearch/dset-healthcare674.git
 git clone org-42072952@github.com:EarnestResearch/dset-healthcare280.git
+git clone org-42072952@github.com:EarnestResearch/healthcare-central.git
 # legacy CE products
 git clone git@github.com:consumer-edge/products.git
 git clone git@github.com:consumer-edge/de_shared.git
@@ -259,6 +260,8 @@ git clone git@github.com:consumer-edge/de_utils.git
 
 # Install spotify
 sudo snap install spotify
+
+
 
 # Install visual studio code
 sudo apt-get install wget gpg
