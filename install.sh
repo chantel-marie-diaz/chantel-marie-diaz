@@ -272,6 +272,11 @@ mv staging-beta-omega-alpha-theta-d4f8d7e79a26.json staging.json
 mv beta-omega-alpha-theta-6ccf1c164196.json prod.json
 cd ..
 
+# Install nordvpn
+sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh)
+nordvpn login
+nordvpn connect
+
 # Copy git config files
 
 
