@@ -164,7 +164,7 @@ wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.1/Hasklig.zi
 sudo unzip $HOME/Downloads/Hasklig.zip -d /usr/local/share/fonts
 #
 
-# Install neovim and dependencies
+# Install neovim and dependencies, make sure to run PluginInstall if installations don't come througg
 sudo apt-get install neovim -y
 sudo apt-get install -y \
   nodejs \
