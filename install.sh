@@ -166,7 +166,6 @@ mkdir ./.config/nvim/
 nvim +PluginInstall +qall
 
 # Install git super status
-
 git clone https://github.com/olivierverdier/zsh-git-prompt.git ~/.zsh
 
 # Service keys
@@ -257,11 +256,18 @@ git clone git@github.com:consumer-edge/de_shared.git
 git clone git@github.com:consumer-edge/ce_airflow_utils.git
 git clone git@github.com:consumer-edge/reporter.git
 git clone git@github.com:consumer-edge/de_utils.git
+cd ../
+
+# Move service keys, assuming downloaded already
+mkdir servicekeys
+cd ./servicekeys
+# cp ~/Downloads/staging-beta-omega-alpha-theta-d4f8d7e79a26.json /home/chantel/servicekeys/
+# cp /home/chanteldiaz/Downloads/beta-omega-alpha-theta-6ccf1c164196.json /home/chantel/servicekeys/
+mv staging-beta-omega-alpha-theta-d4f8d7e79a26.json staging.json
+mv beta-omega-alpha-theta-6ccf1c164196.json prod.json
 
 # Install spotify
 sudo snap install spotify
-
-
 
 # Install visual studio code
 sudo apt-get install wget gpg
