@@ -279,6 +279,10 @@ sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh)
 nordvpn login
 nordvpn connect
 
+# Terminator plugins
+mkdir -p $HOME/.config/terminator/plugins
+wget https://git.io/v5Zww -O $HOME"/.config/terminator/plugins/terminator-themes.py"
+
 # Copy git config files
 
 
