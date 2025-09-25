@@ -105,7 +105,7 @@ alias combined="cd /home/chantel/.werk/products/combined"
 alias hydrus="cd /home/chantel/.werk/dset-healthcare387"
 alias phoenix="cd /home/chantel/.werk/dset-healthcare280"
 alias leo="cd /home/chantel/.werk/dset-healthcare674"
-alias hc="cd 
+alias hc="cd /home/chantel/.werk/healthcare-central"
 
 # Bat with Nord
 export BAT_THEME="Nord"
