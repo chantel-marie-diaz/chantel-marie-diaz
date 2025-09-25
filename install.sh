@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Take a look at https://consumer-edge.atlassian.net/wiki/spaces/DENG/pages/640581679/Data+Eng+Setup+Guide for any manual stuff needed before or after this
+
 # Install zsh
 sudo apt-get install zsh -y
 
@@ -198,9 +200,9 @@ chmod 700 get_helm.sh
 ./get_helm.sh
 
 # Install sops
-curl -LO https://github.com/getsops/sops/releases/download/v3.10.2/sops-v3.10.2.linux.amd64
-sudo dpkg -i sops_3.10.2_amd64.deb
-sudo apt-get install -f
+# curl -LO https://github.com/getsops/sops/releases/download/v3.10.2/sops-v3.10.2.linux.amd64
+#sudo dpkg -i ~/Downloads/sops_3.10.2_amd64.deb
+#sudo apt-get install -f
 
 # Install clickhouse
 curl https://clickhouse.com/ | sh
@@ -238,6 +240,30 @@ sudo apt install ~/Downloads/zoom_amd64.deb -y
 
 # Install warp terminal, probably can use curl instead of manual download
 sudo apt install ~/Downloads/warp-terminal_0.2025.09.17.08.11.stable.02_amd64.deb -y
+
+# Install work git repositories, configure
+cd ./.werk
+mkdir ./.werk
+# git config --system --add safe.directory insert/name/of/directory
+# healthcare
+git clone org-42072952@github.com:EarnestResearch/dset-healthcare387.git
+git clone org-42072952@github.com:EarnestResearch/dset-healthcare674.git
+git clone org-42072952@github.com:EarnestResearch/dset-healthcare280.git
+# legacy CE products
+git clone git@github.com:consumer-edge/products.git
+git clone git@github.com:consumer-edge/de_shared.git
+git clone git@github.com:consumer-edge/ce_airflow_utils.git
+git clone git@github.com:consumer-edge/reporter.git
+git clone git@github.com:consumer-edge/de_utils.git
+
+# Install spotify
+sudo snap install spotify
+
+# Install visual studio code
+sudo apt-get install wget gpg
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+sudo install -D -o root -g root -m 644 microsoft.gpg /usr/share/keyrings/microsoft.gpg
+rm -f microsoft.gpg
 
 # Changing terminal to my name
 sudo hostnamectl hostname chantel
