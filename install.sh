@@ -2,6 +2,8 @@
 
 # Take a look at https://consumer-edge.atlassian.net/wiki/spaces/DENG/pages/640581679/Data+Eng+Setup+Guide for any manual stuff needed before or after this
 
+# git config --global commit.gpgsign true make default commit
+
 # Install zsh
 sudo apt-get install zsh -y
 
