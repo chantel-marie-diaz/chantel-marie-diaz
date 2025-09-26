@@ -2,7 +2,7 @@
 
 # Take a look at https://consumer-edge.atlassian.net/wiki/spaces/DENG/pages/640581679/Data+Eng+Setup+Guide for any manual stuff needed before or after this
 
-# git config --global commit.gpgsign true make default commit
+# git config --global commit.gpgsign true make default commit git config --global user.signingkey EEC01C4F739029BA
 
 # Install zsh
 sudo apt-get install zsh -y
@@ -173,6 +173,8 @@ sudo apt-get install -y \
   npm
 mkdir ./.config/nvim/
 nvim +PluginInstall +qall
+sudo apt install python3-pip
+pip3 install pynvim
 
 # Install git super status
 git clone https://github.com/olivierverdier/zsh-git-prompt.git ~/.zsh
@@ -276,6 +278,8 @@ cd ..
 
 # Install nordvpn
 sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh)
+sudo groupadd nordvpn
+sudo usermod -aG nordvpn $USER
 nordvpn login
 nordvpn connect
 
@@ -284,6 +288,17 @@ mkdir -p $HOME/.config/terminator/plugins
 wget https://git.io/v5Zww -O $HOME"/.config/terminator/plugins/terminator-themes.py"
 
 # Copy git config files
+
+# Install github cli
+(type -p wget >/dev/null || (sudo apt update && sudo apt install wget -y)) \
+	&& sudo mkdir -p -m 755 /etc/apt/keyrings \
+	&& out=$(mktemp) && wget -nv -O$out https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+	&& cat $out | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
+	&& sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+	&& sudo mkdir -p -m 755 /etc/apt/sources.list.d \
+	&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+	&& sudo apt update \
+	&& sudo apt install gh -y
 
 
 # Install spotify
