@@ -223,8 +223,11 @@ sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 
 # Install terraform
-sudo apt update
-sudo apt-get install terraform -y
+# sudo apt update
+git clone --depth=1 https://github.com/tfutils/tfenv.git ~/.tfenv
+echo 'export PATH="$HOME/.tfenv/bin:$PATH"' >> ~/.zprofile
+tfenv install 1.5.1
+# sudo apt-get install terraform -y
 
 # Install pipx
 sudo apt update
