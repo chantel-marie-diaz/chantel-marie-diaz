@@ -117,22 +117,23 @@ batdiff() {
     git diff --name-only --relative --diff-filter=d | xargs bat --diff
 }
 
-# Vgrep and Fzf
+# Rgrep and Fzf
 
-vgrep() {
-  INITIAL_QUERY="$1"
-  VGREP_PREFIX="vgrep --no-header "
-  FZF_DEFAULT_COMMAND="$VGREP_PREFIX '$INITIAL_QUERY'" \
-  fzf --bind "change:reload:$VGREP_PREFIX {q} || true" --ansi --phony --tac --query "$INITIAL_QUERY" \
-  | awk '{print $1}' | xargs -I{} -o vgrep --show {}
-}
-
+rgrep() { rg --line-number --with-filename . --color=always --field-match-separator ' ' \
+| fzf --ansi --preview "batcat --color=always {1} --highlight-line {2}" \
+      --preview-window ~8,+{2}-5
+    }
 # add Pulumi to the PATH
 export PATH=$PATH:$HOME/.pulumi/bin
 
 # Shortcut to copy entire zsh register into clipboard
 bindkey -M vicmd 'yy' zsh-system-clipboard-vicmd-vi-yank-whole-line
 
+# The next line updates PATH for the Google Cloud SDK.
+source "/home/chanteldiaz/servicekeys/google-cloud-sdk/path.zsh.inc"
+
+# The next line enables shell command completion for gcloud.
+source "/home/chanteldiaz/servicekeys/google-cloud-sdk/completion.zsh.inc"
 # The next line updates PATH for the Google Cloud SDK.
 source "/home/chanteldiaz/servicekeys/google-cloud-sdk/path.zsh.inc"
 
