@@ -16,20 +16,23 @@ export EDITOR="nvim"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git aws docker docker-compose fzf-tab kubectl minikube zsh-autosuggestions fast-syntax-highlighting zsh-interactive-cd zsh-system-clipboard pulumi )
+plugins=(git aws docker docker-compose kubectl minikube zsh-interactive-cd zsh-autosuggestions fast-syntax-highlighting clipboard)
+
 
 source $ZSH/oh-my-zsh.sh
 
 # Staging File
 export PATH=$PATH:/usr/local/go/bin
-export DBT_KEYFILE="/home/chantel/servicekeys/staging.json"
-export DEV_KEYFILE="/home/chantel/servicekeys/dev.json"
-export GOOGLE_APPLICATION_CREDENTIALS="/home/chantel/servicekeys/staging.json"
+export DBT_KEYFILE="/home/chanteldiaz/servicekeys/staging.json"
+export DEV_KEYFILE="/home/chanteldiaz/servicekeys/dev.json"
+# export GOOGLE_APPLICATION_CREDENTIALS="/home/chanteldiaz/servicekeys/staging.json"
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 # Zsh Git Super Status to Show Branch State in Terminal
 source ~/.zsh/zsh-git-prompt/zshrc.sh
 PROMPT='%B%m%~%b$(git_super_status) %# '
+
+export GPG_TTY=$(tty)
 
 # Do not remove slash from dir
 setopt no_auto_remove_slash
@@ -64,7 +67,6 @@ export PYTHONBREAKPOINT=ipdb.set_trace
 
 # Some Alias Commands
 alias ls="exa"
-alias b="bat"
 alias dk="docker"
 alias preview="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 alias fd="fdfind"
@@ -107,7 +109,6 @@ alias hydrus="cd ~/.werk/dset-healthcare387"
 alias phoenix="cd ~/.werk/dset-healthcare280"
 alias leo="cd ~/.werk/dset-healthcare674"
 alias hc="cd ~/.werk/healthcare-central"
-
 # Bat with Nord
 export BAT_THEME="Nord"
 
@@ -117,6 +118,7 @@ batdiff() {
 }
 
 # Vgrep and Fzf
+
 vgrep() {
   INITIAL_QUERY="$1"
   VGREP_PREFIX="vgrep --no-header "
@@ -130,3 +132,9 @@ export PATH=$PATH:$HOME/.pulumi/bin
 
 # Shortcut to copy entire zsh register into clipboard
 bindkey -M vicmd 'yy' zsh-system-clipboard-vicmd-vi-yank-whole-line
+
+# The next line updates PATH for the Google Cloud SDK.
+source "/home/chanteldiaz/servicekeys/google-cloud-sdk/path.zsh.inc"
+
+# The next line enables shell command completion for gcloud.
+source "/home/chanteldiaz/servicekeys/google-cloud-sdk/completion.zsh.inc"
