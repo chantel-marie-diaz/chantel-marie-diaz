@@ -228,6 +228,7 @@ git clone --depth=1 https://github.com/tfutils/tfenv.git ~/.tfenv
 echo 'export PATH="$HOME/.tfenv/bin:$PATH"' >> ~/.zprofile
 tfenv install 1.5.1
 # sudo apt-get install terraform -y
+terraform init
 
 # Install pipx
 sudo apt update
