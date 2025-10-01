@@ -30,6 +30,7 @@ sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt install python3.9 -y
 
 # Install python virtual environments
+sudo apt install python3.11-venv -y
 sudo apt install python3.10-venv -y
 sudo apt install python3.9-venv -y
 
