@@ -23,9 +23,11 @@ source $ZSH/oh-my-zsh.sh
 
 # Staging File
 export PATH=$PATH:/usr/local/go/bin
+#export PULUMI_CONFIG_PASSPHRASE=~ceiac~
 export DBT_KEYFILE="/home/chanteldiaz/servicekeys/staging.json"
 export DEV_KEYFILE="/home/chanteldiaz/servicekeys/dev.json"
 # export GOOGLE_APPLICATION_CREDENTIALS="/home/chanteldiaz/servicekeys/staging.json"
+
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 # Zsh Git Super Status to Show Branch State in Terminal
