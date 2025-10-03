@@ -305,6 +305,9 @@ wget https://git.io/v5Zww -O $HOME"/.config/terminator/plugins/terminator-themes
 	&& sudo apt update \
 	&& sudo apt install gh -y
 
+# We use Alacritty's default Linux config directory as our storage location here.
+mkdir -p ~/.config/alacritty/themes
+git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
 
 # Install spotify
 sudo snap install spotify
