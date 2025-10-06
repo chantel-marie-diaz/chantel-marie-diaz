@@ -318,5 +318,10 @@ wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mi
 sudo install -D -o root -g root -m 644 microsoft.gpg /usr/share/keyrings/microsoft.gpg
 rm -f microsoft.gpg
 
+# Install composer-local-dev
+git clone git@github.com:GoogleCloudPlatform/composer-local-dev.git
+cd composer-local-dev/
+pip install .
+
 # Changing terminal to my name
 sudo hostnamectl hostname chantel
