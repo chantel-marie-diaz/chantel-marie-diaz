@@ -322,6 +322,7 @@ rm -f microsoft.gpg
 git clone git@github.com:GoogleCloudPlatform/composer-local-dev.git
 cd composer-local-dev/
 pip install .
+cd ..
 
 # Changing terminal to my name
 sudo hostnamectl hostname chantel
