@@ -92,8 +92,9 @@ git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle
 # Install bat
 brew install bat
 
-# Install exa
-brew install exa
+# Install eza instead of exa
+# brew install exa
+brew install eza
 
 # Install git delta
 brew install git-delta
@@ -181,3 +182,5 @@ git clone git@github.com:GoogleCloudPlatform/composer-local-dev.git
 cd composer-local-dev/
 pip install .
 cd ..
+
+sudo scutil --set HostName chanteldiaz
