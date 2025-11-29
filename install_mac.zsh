@@ -169,3 +169,9 @@ git clone git@github.com:consumer-edge/reporter.git
 git clone git@github.com:consumer-edge/de_utils.git
 cd ..
 
+# Generate gpg keys
+#gpg --default-new-key-algo rsa4096 --gen-key
+#git config --global commit.gpgsign true
+brew install gnupg
+
+
