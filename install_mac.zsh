@@ -34,6 +34,7 @@ brew install --cask ghostty
 brew install terminator
 
 #Install python envs
+brew install python3
 brew install python@3.9
 brew install python@3.10
 brew install python@3.11
@@ -174,4 +175,8 @@ cd ..
 #git config --global commit.gpgsign true
 brew install gnupg
 
-
+# Install composer-local-dev
+git clone git@github.com:GoogleCloudPlatform/composer-local-dev.git
+cd composer-local-dev/
+pip install .
+cd ..
