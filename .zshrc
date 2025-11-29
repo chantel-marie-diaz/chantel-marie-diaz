@@ -114,9 +114,9 @@ alias groundtruth="cd ~/.werk/products/ground_truth"
 alias weather="cd ~/.werk/products/weather"
 alias airflow_utils="cd ~/.werk/ce_airflow_utils"
 alias combined="cd ~/.werk/products/combined"
-alias hydrus="cd ~/.werk/dset-healthcare387"
-alias phoenix="cd ~/.werk/dset-healthcare280"
-alias leo="cd ~/.werk/dset-healthcare674"
+alias hydrus="cd ~/.werk/hc/hc_387"
+alias phoenix="cd ~/.werk/hc/hc_280"
+alias leo="cd ~/.werk/hc_674"
 alias hc="cd ~/.werk/healthcare-central"
 # Bat with Nord
 export BAT_THEME="Nord"
@@ -129,7 +129,7 @@ batdiff() {
 # Rgrep and Fzf
 
 rgrep() { rg --line-number --with-filename . --color=always --field-match-separator ' ' \
-| fzf --ansi --preview "batcat --color=always {1} --highlight-line {2}" \
+| fzf --ansi --preview "bat --color=always {1} --highlight-line {2}" \
       --preview-window ~8,+{2}-5
     }
 # add Pulumi to the PATH
@@ -137,137 +137,6 @@ export PATH=$PATH:$HOME/.pulumi/bin
 
 # Shortcut to copy entire zsh register into clipboard
 bindkey -M vicmd 'yy' zsh-system-clipboard-vicmd-vi-yank-whole-line
-
-# The next line updates PATH for the Google Cloud SDK.
-source "/home/chanteldiaz/servicekeys/google-cloud-sdk/path.zsh.inc"
-
-# The next line enables shell command completion for gcloud.
-source "/home/chanteldiaz/servicekeys/google-cloud-sdk/completion.zsh.inc"
-# The next line updates PATH for the Google Cloud SDK.
-source "/home/chanteldiaz/servicekeys/google-cloud-sdk/path.zsh.inc"
-
-# The next line enables shell command completion for gcloud.
-source "/home/chanteldiaz/servicekeys/google-cloud-sdk/completion.zsh.inc"
-
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/cdiaz/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/cdiaz/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/cdiaz/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/cdiaz/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
----
-
-
-
-
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
-
-# Path to your Oh My Zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time Oh My Zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-
-# Preferred editor for local and remote sessions
-# else
-#   export EDITOR='nvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch $(uname -m)"
-
-# Set personal aliases, overriding those provided by Oh My Zsh libs,
-# plugins, and themes. Aliases can be placed here, though Oh My Zsh
-# users are encouraged to define aliases within a top-level file in
-# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
-# - $ZSH_CUSTOM/aliases.zsh
-# - $ZSH_CUSTOM/macos.zsh
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-export HOMEBREW_PREFIX="/opt/homebrew";
-export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
-export HOMEBREW_REPOSITORY="/opt/homebrew";
-fpath[1,0]="/opt/homebrew/share/zsh/site-functions";
-eval "$(/usr/bin/env PATH_HELPER_ROOT="/opt/homebrew" /usr/libexec/path_helper -s)"
-[ -z "${MANPATH-}" ] || export MANPATH=":${MANPATH#:}";
-export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/cdiaz/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/cdiaz/Downloads/google-cloud-sdk/path.zsh.inc'; fi
