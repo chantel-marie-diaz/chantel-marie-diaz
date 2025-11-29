@@ -137,7 +137,8 @@ brew install tfenv
 brew install pipx
 
 # Install poetry
-pipx install poetry
+# pipx install poetry
+brew install poetry
 
 #new ssh key
 #ssh-keygen -t ed25519 -C "cdiaz@consumer-edge.com"
