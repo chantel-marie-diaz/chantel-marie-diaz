@@ -141,6 +141,9 @@ brew install pipx
 # pipx install poetry
 brew install poetry
 
+# Install awscli
+brew install awscli
+
 #new ssh key
 #ssh-keygen -t ed25519 -C "cdiaz@consumer-edge.com"
 #$ eval "$(ssh-agent -s)"
