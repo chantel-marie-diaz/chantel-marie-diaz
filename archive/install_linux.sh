@@ -1,5 +1,13 @@
 #!/bin/bash
-
+# ARCHIVED 2026-10-15. Unmaintained, kept for reference only.
+#
+# This script does not run to completion on Ubuntu 22.04 or 24.04. Known breakage:
+#   - the oh-my-zsh step ends with `exec zsh -l`, so nothing after it runs
+#   - postgresql-12 is in neither 22.04 nor 24.04; it takes pgcli down with it
+#   - the Google Cloud repo is added but google-cloud-cli is never installed
+#   - `-y` is passed to `install` and to `bash`, which do not accept it
+#   - exa is archived, delta and Go are pinned to old versions, downloads are amd64 only
+#
 # Take a look at https://consumer-edge.atlassian.net/wiki/spaces/DENG/pages/640581679/Data+Eng+Setup+Guide for any manual stuff needed before or after this
 
 # git config --global commit.gpgsign true make default commit git config --global user.signingkey EEC01C4F739029BA
