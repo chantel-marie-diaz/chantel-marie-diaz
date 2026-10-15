@@ -149,7 +149,7 @@ alias phoenix="cd ~/.werk/healthcare-central/dbt/hc_280"
 alias leo="cd ~/.werk/healthcare-central/dbt/hc_674"
 alias hc="cd ~/.werk/healthcare-central"
 # Bat with Nord
-export BAT_THEME="Nord"
+export BAT_THEME="ansi"
 
 # Bat and Git
 batdiff() {

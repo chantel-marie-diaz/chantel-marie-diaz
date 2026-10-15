@@ -1,6 +1,6 @@
 #!/bin/bash
 # Take a look at https://consumer-edge.atlassian.net/wiki/spaces/DENG/pages/640581679/Data+Eng+Setup+Guide for any manual stuff needed before or after this
-# git config --global commit.gpgsign true make default commit git config --global user.signingkey EEC01C4F739029BA
+# GPG signing: git config --global commit.gpgsign true && git config --global user.signingkey 1C9539D93608875B
 # MAKE SURE INSTALL XCODE xcode-select --install
 # download brew
 
@@ -107,14 +107,14 @@ brew install --cask font-hasklig
 # Install neovim, add init.vim before starting
 # TODO: clone repo and grab init.vim beforehand
 brew install neovim
-mkdir ./.config/nvim/
+mkdir -p ~/.config/nvim
 nvim +PluginInstall +qall
-brew install pynvim
+# Python provider for Neovim, needed by UltiSnips. pynvim is a pip package, not a Homebrew formula.
+python3 -m pip install --user --break-system-packages pynvim
 
 # Gcloud CLI
 # get tar file, programtically
 tar -xf google-cloud-cli-darwin-arm.tar.gz
-./google-cloud-sdk/install.sh
 ./google-cloud-sdk/install.sh
 
 # Install pulumi
