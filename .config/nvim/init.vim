@@ -35,7 +35,7 @@ Plugin 'itchyny/vim-gitbranch' " shows what branch currently in vim using lightl
 Plugin 'dense-analysis/ale' " linting engine, needs linters installed in env to work
 Plugin 'nvie/vim-flake8' " runs flake8 in vim
 Plugin 'pedrohdz/vim-yaml-folds' " creates folds in yaml file to open and close different sections
-Plugin 'arcticicestudio/nord-vim' " for nice aesthetics
+Plugin 'sainnhe/everforest' " colorscheme, matches the Ghostty everforest-dark theme
 " A few manual steps in https://github.com/iamcco/markdown-preview.nvim
 Plugin 'iamcco/markdown-preview.nvim'
 
@@ -89,7 +89,7 @@ call wilder#set_option('renderer', wilder#popupmenu_renderer({
 
 " Lightline for Vim Status Line.
 let g:lightline = {
-      \ 'colorscheme': 'nord',
+      \ 'colorscheme': 'everforest',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -174,9 +174,11 @@ endif
 let python_highlight_all=1
 syntax on
 
-" Nord Theme for Vim.
-colorscheme nord
-highlight Comment ctermfg=LightGrey
+" Everforest Theme for Vim. Medium contrast matches the Ghostty palette (#2d353b).
+set termguicolors
+set background=dark
+let g:everforest_background = 'medium'
+colorscheme everforest
 
 " Ale Linting and Configuration.
 let g:ale_fix_on_save = 1
