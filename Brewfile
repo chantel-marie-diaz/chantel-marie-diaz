@@ -53,6 +53,8 @@ brew "python@3.12"
 brew "python@3.14"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# Organize software neatly under a single directory tree (e.g. /usr/local)
+brew "stow"
 # Multiple GNOME terminals in one window
 brew "terminator"
 # Terraform version manager inspired by rbenv

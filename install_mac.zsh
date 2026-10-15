@@ -3,12 +3,11 @@
 #
 # Before this script:
 #   xcode-select --install
-#   Copy .config/nvim/init.vim from this repo to ~/.config/nvim/, or Vundle has nothing to install.
 #   See https://consumer-edge.atlassian.net/wiki/spaces/DENG/pages/640581679/Data+Eng+Setup+Guide
 # After this script:
 #   SSH key: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
 #   GPG key: gpg --default-new-key-algo rsa4096 --gen-key
-#            git config --global commit.gpgsign true && git config --global user.signingkey 1C9539D93608875B
+#            home/.gitconfig already signs with key 1C9539D93608875B
 #   gcloud init          (opens a browser)
 #   Docker Desktop       first launch asks for a password
 
@@ -30,6 +29,9 @@ brew bundle --file="$DOTFILES/Brewfile"
 # running chsh. The login shell is already /bin/zsh.
 if [[ ! -d ~/.oh-my-zsh ]]; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  # The installer leaves its own template at ~/.zshrc. This repository's copy
+  # replaces it. It is a copy and not a link; see home/.stow-local-ignore.
+  cp "$DOTFILES/home/.zshrc" ~/.zshrc
 fi
 
 ZSH_CUSTOM=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
@@ -41,14 +43,18 @@ clone_plugin https://github.com/zsh-users/zsh-autosuggestions zsh-autosuggestion
 clone_plugin https://github.com/zdharma-continuum/fast-syntax-highlighting fast-syntax-highlighting
 clone_plugin https://github.com/kutsan/zsh-system-clipboard zsh-system-clipboard
 
-# --- Git ---------------------------------------------------------------------
-git config --global user.name "Chantel Diaz"
-git config --global user.email "cdiaz@consumer-edge.com"
+# --- Dotfiles ----------------------------------------------------------------
+# Stow symlinks everything under home/ into $HOME, so the repository holds the
+# only copy of each file and the two cannot drift apart.
+mkdir -p ~/.config/nvim
+stow -d "$DOTFILES" -t "$HOME" home
+
+# Git needs no setup here: identity, signing key and aliases are all in the
+# stowed home/.gitconfig.
 
 # --- Editors -----------------------------------------------------------------
 [[ -d ~/.vim/bundle/Vundle.vim ]] ||
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-mkdir -p ~/.config/nvim
 nvim +PluginInstall +qall
 
 # Python provider for Neovim, needed by UltiSnips. init.vim points

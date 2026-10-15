@@ -1,0 +1,5 @@
+# .zshrc holds GITHUB_PAT and ATLASSIAN_API_TOKEN. The copy here reads both from
+# the macOS Keychain; the live copy still has them inline. Symlinking it before
+# those Keychain entries exist would empty both variables, so it stays a copy.
+# Delete this line once `security add-generic-password` has run for both.
+^/\.zshrc$
