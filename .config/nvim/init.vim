@@ -1,6 +1,9 @@
 set nocompatible
 " filetype off
 
+" Python provider for plugins such as UltiSnips. A uv-managed venv keeps it working across Homebrew Python upgrades.
+let g:python3_host_prog = expand('~/.local/share/nvim/venv/bin/python')
+
 " Vundle.
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()

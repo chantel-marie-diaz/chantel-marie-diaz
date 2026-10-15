@@ -109,8 +109,12 @@ brew install --cask font-hasklig
 brew install neovim
 mkdir -p ~/.config/nvim
 nvim +PluginInstall +qall
-# Python provider for Neovim, needed by UltiSnips. pynvim is a pip package, not a Homebrew formula.
-python3 -m pip install --user --break-system-packages pynvim
+# Python provider for Neovim, needed by UltiSnips. init.vim points g:python3_host_prog at this venv.
+# uv's own Python keeps it working across Homebrew Python upgrades.
+brew install uv
+uv python install 3.12
+uv venv --python-preference only-managed --python 3.12 ~/.local/share/nvim/venv
+uv pip install --python ~/.local/share/nvim/venv/bin/python pynvim
 
 # Gcloud CLI
 # get tar file, programtically
