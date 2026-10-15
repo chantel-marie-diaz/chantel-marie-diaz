@@ -1,186 +1,97 @@
-#!/bin/bash
-# Take a look at https://consumer-edge.atlassian.net/wiki/spaces/DENG/pages/640581679/Data+Eng+Setup+Guide for any manual stuff needed before or after this
-# GPG signing: git config --global commit.gpgsign true && git config --global user.signingkey 1C9539D93608875B
-# MAKE SURE INSTALL XCODE xcode-select --install
-# download brew
+#!/usr/bin/env zsh
+# Mac setup. Safe to re-run: every step skips work that is already done.
+#
+# Before this script:
+#   xcode-select --install
+#   Copy .config/nvim/init.vim from this repo to ~/.config/nvim/, or Vundle has nothing to install.
+#   See https://consumer-edge.atlassian.net/wiki/spaces/DENG/pages/640581679/Data+Eng+Setup+Guide
+# After this script:
+#   SSH key: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+#   GPG key: gpg --default-new-key-algo rsa4096 --gen-key
+#            git config --global commit.gpgsign true && git config --global user.signingkey 1C9539D93608875B
+#   gcloud init          (opens a browser)
+#   Docker Desktop       first launch asks for a password
 
-# Install homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+set -euo pipefail
 
-# install zsh
-brew install zsh
+DOTFILES=${0:A:h}
 
-# Switch default shell to zsh
-chsh -s $(which zsh)
-
-# Oh My Zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-#Manually correct slashes in ~/.zprofile if needed then source
+# --- Homebrew, and everything it installs ------------------------------------
+if ! command -v brew >/dev/null; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# Source zprofile
-source ~/.zprofile
+# Formulae, casks, uv tools and npm globals all live in the Brewfile.
+brew bundle --file="$DOTFILES/Brewfile"
 
-# Additional zsh plugins
-git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git \
-  ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
-  git clone https://github.com/kutsan/zsh-system-clipboard ${ZSH_CUSTOM:-~/.zsh}/plugins/zsh-system-clipboard
+# --- Shell -------------------------------------------------------------------
+# --unattended keeps the installer from replacing this shell mid-script and from
+# running chsh. The login shell is already /bin/zsh.
+if [[ ! -d ~/.oh-my-zsh ]]; then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
 
-# Other terminals
-brew install --cask ghostty
-brew install terminator
+ZSH_CUSTOM=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
+clone_plugin() {  # $1 = repository, $2 = plugin name
+  [[ -d "$ZSH_CUSTOM/plugins/$2" ]] || git clone --depth 1 "$1" "$ZSH_CUSTOM/plugins/$2"
+}
+clone_plugin https://github.com/Aloxaf/fzf-tab fzf-tab
+clone_plugin https://github.com/zsh-users/zsh-autosuggestions zsh-autosuggestions
+clone_plugin https://github.com/zdharma-continuum/fast-syntax-highlighting fast-syntax-highlighting
+clone_plugin https://github.com/kutsan/zsh-system-clipboard zsh-system-clipboard
 
-#Install python envs
-brew install python3
-brew install python@3.9
-brew install python@3.10
-brew install python@3.11
-
-# Install git
-brew install git
+# --- Git ---------------------------------------------------------------------
 git config --global user.name "Chantel Diaz"
 git config --global user.email "cdiaz@consumer-edge.com"
 
-# Make zsh directory for plugins
-mkdir ~/zsh
-
-# Install docker manually, https://docs.docker.com/desktop/setup/install/mac-install/ then
-sudo hdiutil attach Docker.dmg
-sudo /Volumes/Docker/Docker.app/Contents/MacOS/install
-sudo hdiutil detach /Volumes/Docker
-#docker engine not needed for MAC
-
-# Install rclone
-sudo -v ; curl https://rclone.org/install.sh | sudo bash
-
-# Install fd
-brew install fd
-
-# Download FileZilla manually: https://filezilla-project.org/download.php?platform=macos-arm64
-
-# Install fzf
-brew install fzf
-
-# Install ripgrep (rg), used by vgrep in .zshrc
-brew install ripgrep
-
-# Install autojump
-brew install autojump
-
-# Install tree
-brew install tree
-
-# Install unzip
-brew install unzip
-
-# Install tmux
-brew install tmux
-
-# Install postgres
-brew install postgresql
-
-# Install graphviz
-# brew install graphviz
-
-# Install vundle
-git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim
-
-# Install bat
-brew install bat
-
-# Install eza instead of exa
-# brew install exa
-brew install eza
-
-# Install git delta
-brew install git-delta
-
-# Install go
-brew install go
-
-# Install hasklig
-brew install --cask font-hasklig
-
-# Install neovim, add init.vim before starting
-# TODO: clone repo and grab init.vim beforehand
-brew install neovim
+# --- Editors -----------------------------------------------------------------
+[[ -d ~/.vim/bundle/Vundle.vim ]] ||
+  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 mkdir -p ~/.config/nvim
 nvim +PluginInstall +qall
-# Python provider for Neovim, needed by UltiSnips. init.vim points g:python3_host_prog at this venv.
-# uv's own Python keeps it working across Homebrew Python upgrades.
-brew install uv
-uv python install 3.12
-uv venv --python-preference only-managed --python 3.12 ~/.local/share/nvim/venv
-uv pip install --python ~/.local/share/nvim/venv/bin/python pynvim
 
-# Gcloud CLI
-# get tar file, programtically
-tar -xf google-cloud-cli-darwin-arm.tar.gz
-./google-cloud-sdk/install.sh
+# Python provider for Neovim, needed by UltiSnips. init.vim points
+# g:python3_host_prog at this venv. uv's own Python keeps it working across
+# Homebrew Python upgrades.
+if [[ ! -d ~/.local/share/nvim/venv ]]; then
+  uv python install 3.12
+  uv venv --python-preference only-managed --python 3.12 ~/.local/share/nvim/venv
+  uv pip install --python ~/.local/share/nvim/venv/bin/python pynvim
+fi
 
-# Install pulumi
-brew install pulumi
+# --- Cloud tooling -----------------------------------------------------------
+# .zshrc sources path.zsh.inc and completion.zsh.inc from this directory.
+if [[ ! -d ~/Downloads/google-cloud-sdk ]]; then
+  curl -fsSL -o "$TMPDIR/gcloud.tar.gz" \
+    https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-darwin-arm.tar.gz
+  tar -xf "$TMPDIR/gcloud.tar.gz" -C ~/Downloads
+  ~/Downloads/google-cloud-sdk/install.sh --quiet
+fi
 
-# Install helm
-brew install helm
+command -v rclone >/dev/null || { sudo -v; curl https://rclone.org/install.sh | sudo bash; }
 
-# Install terraform
-brew tap hashicorp/tap 
-brew install tfenv
+# composer-local-dev. Homebrew's Python refuses `pip install .` because it marks
+# itself externally managed, so install it as a standalone tool.
+if ! command -v composer-dev >/dev/null; then
+  [[ -d ~/.werk/composer-local-dev ]] ||
+    git clone git@github.com:GoogleCloudPlatform/composer-local-dev.git ~/.werk/composer-local-dev
+  uv tool install ~/.werk/composer-local-dev
+fi
 
-# Install pipx
-brew install pipx
+# --- Work repositories -------------------------------------------------------
+mkdir -p ~/.werk
+clone_repo() {  # $1 = clone URL
+  local name=${${1##*/}%.git}
+  [[ -d ~/.werk/$name ]] || git clone "$1" ~/.werk/$name
+}
+clone_repo git@github.com:chantel-marie-diaz/chantel-marie-diaz.git
+clone_repo org-42072952@github.com:EarnestResearch/healthcare-central.git
+clone_repo git@github.com:consumer-edge/ce_airflow_utils.git
+clone_repo git@github.com:consumer-edge/products.git
+clone_repo git@github.com:consumer-edge/de_shared.git
+clone_repo git@github.com:consumer-edge/de_utils.git
+clone_repo git@github.com:consumer-edge/reporter.git
 
-# Install poetry
-# pipx install poetry
-brew install poetry
-
-# Install awscli
-brew install awscli
-
-#new ssh key
-#ssh-keygen -t ed25519 -C "cdiaz@consumer-edge.com"
-#$ eval "$(ssh-agent -s)"
-#touch ~/.ssh/config
-#https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
-#Host github.com
-#  AddKeysToAgent yes
-#  UseKeychain yes
-#  IdentityFile ~/.ssh/id_ed25519
-# ssh-add  ~/.ssh/id_ed25519
-# $ pbcopy < ~/.ssh/id_ed25519.pub
-# Copies the contents of the id_ed25519.pub file to your clipboard
-
-# Install work git repositories, configure
-mkdir .werk
-cd .werk
-# git config --system --add safe.directory insert/name/of/directory
-git clone git@github.com:chantel-marie-diaz/chantel-marie-diaz.git
-# healthcare
-git clone org-42072952@github.com:EarnestResearch/dset-healthcare387.git
-git clone org-42072952@github.com:EarnestResearch/dset-healthcare674.git
-git clone org-42072952@github.com:EarnestResearch/dset-healthcare280.git
-git clone org-42072952@github.com:EarnestResearch/healthcare-central.git
-# legacy CE products
-git clone git@github.com:consumer-edge/products.git
-git clone git@github.com:consumer-edge/de_shared.git
-git clone git@github.com:consumer-edge/ce_airflow_utils.git
-git clone git@github.com:consumer-edge/reporter.git
-git clone git@github.com:consumer-edge/de_utils.git
-cd ..
-
-# Generate gpg keys
-#gpg --default-new-key-algo rsa4096 --gen-key
-#git config --global commit.gpgsign true
-brew install gnupg
-
-# Install composer-local-dev
-git clone git@github.com:GoogleCloudPlatform/composer-local-dev.git
-cd composer-local-dev/
-pip install .
-cd ..
-
-sudo scutil --set HostName chanteldiaz
+# --- Machine -----------------------------------------------------------------
+[[ $(scutil --get HostName 2>/dev/null) == chanteldiaz ]] || sudo scutil --set HostName chanteldiaz
