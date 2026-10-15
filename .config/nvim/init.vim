@@ -290,6 +290,9 @@ xnoremap p pgvy
 
 " Autostart Git Gutter.
 autocmd VimEnter * GitGutter
+" Refresh signs after 100ms idle (default 4000ms) and keep the sign column fixed so text does not shift.
+set updatetime=100
+set signcolumn=yes
 
 " Autoformat CSV on Open.
 " Borrowed from: https://github.com/chrisbra/csv.vim/blob/master/csv.vmb
