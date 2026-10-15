@@ -73,6 +73,10 @@ cask "ghostty"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
 
+# Neovim runs these three on save: init.vim sets ale_fixers for python.
+uv "autoflake"
+uv "black"
+uv "isort"
 uv "dbt-oss"
 uv "keyring", with: ["keyrings-google-artifactregistry-auth"]
 
