@@ -66,6 +66,16 @@ if [[ ! -d ~/.local/share/nvim/venv ]]; then
   uv pip install --python ~/.local/share/nvim/venv/bin/python pynvim
 fi
 
+# Vimspector's debug adapter. install_gadget.py bakes its own interpreter into
+# gadgets/macos/.gadgets.json, so that interpreter has to be a stable one. It
+# also needs setuptools, which Homebrew's Python no longer ships.
+if [[ ! -d ~/.vim/bundle/vimspector/gadgets/macos ]]; then
+  uv venv --python-preference only-managed --python 3.12 ~/.local/share/vimspector/venv
+  uv pip install --python ~/.local/share/vimspector/venv/bin/python setuptools
+  ~/.local/share/vimspector/venv/bin/python ~/.vim/bundle/vimspector/install_gadget.py \
+    --enable-python --update-gadget-config
+fi
+
 # --- Cloud tooling -----------------------------------------------------------
 # .zshrc sources path.zsh.inc and completion.zsh.inc from this directory.
 if [[ ! -d ~/.local/share/google-cloud-sdk ]]; then
