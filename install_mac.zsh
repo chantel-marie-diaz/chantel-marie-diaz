@@ -56,14 +56,10 @@ sudo hdiutil detach /Volumes/Docker
 # Install rclone
 sudo -v ; curl https://rclone.org/install.sh | sudo bash
 
-# Install py dev env
-sudo apt-get install python-dev-is-python3 -y
-
 # Install fd
 brew install fd
 
-# Download filezilla manually
-https://filezilla-project.org/download.php?platform=macos-arm64#close
+# Download FileZilla manually: https://filezilla-project.org/download.php?platform=macos-arm64
 
 # Install fzf
 brew install fzf
@@ -105,9 +101,6 @@ brew install git-delta
 # Install go
 brew install go
 
-# Install vgrep
-brew install vgrep
-
 # Install hasklig
 brew install --cask font-hasklig
 
@@ -117,9 +110,6 @@ brew install neovim
 mkdir ./.config/nvim/
 nvim +PluginInstall +qall
 brew install pynvim
-
-# Install git super status
-git clone https://github.com/olivierverdier/zsh-git-prompt.git ~/.zsh
 
 # Gcloud CLI
 # get tar file, programtically
