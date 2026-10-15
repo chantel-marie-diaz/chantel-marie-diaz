@@ -17,7 +17,7 @@ export EDITOR="nvim"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # ezample format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git aws docker docker-compose kubectl minikube zsh-interactive-cd zsh-autosuggestions fast-syntax-highlighting)
+plugins=(git aws docker docker-compose kubectl minikube zsh-interactive-cd fzf-tab zsh-system-clipboard zsh-autosuggestions fast-syntax-highlighting)
 
 pulumi-hc() {
     PULUMI_BACKEND_URL="gs://er-pulumi" \
@@ -122,7 +122,7 @@ alias v="nvim"
 alias gohome="cd ~/"
 alias gowork="cd ~/.werk/"
 alias gonvim="cd ~/.config/nvim/"
-alias create="python3.9 -m venv venv"
+alias create="uv venv -p 3.9 --seed venv"
 alias activate="source ./venv/bin/activate"
 
 # Projects
@@ -160,11 +160,18 @@ batdiff() {
 
 # Fuzzy-search every line under the current directory, including dotfiles, with a bat preview.
 # An optional argument narrows the search to lines that match that regex first.
+# The preview highlights every match; with no argument it underlines the selected line.
 # Enter opens the selected line in nvim.
 vgrep() {
-  local match
-  match=$(rg --hidden --glob '!.git/' --line-number --with-filename --color=always --field-match-separator ' ' "${1:-.}" \
-    | fzf --ansi --preview 'bat --color=always {1} --highlight-line {2}' \
+  local match preview
+  local -x pattern="${1:-.}"
+  if [[ -n "$1" ]]; then
+    preview='bat --color=always {1} | rg --passthru --color=always --colors "match:bg:yellow" --colors "match:fg:black" --colors "match:style:nobold" -e "$pattern"'
+  else
+    preview='bat --color=always {1} --highlight-line {2}'
+  fi
+  match=$(rg --hidden --glob '!.git/' --line-number --with-filename --color=always --field-match-separator ' ' "$pattern" \
+    | fzf --ansi --preview "$preview" \
           --preview-window '~8,+{2}-5') || return
   nvim "+${${match#* }%% *}" "${match%% *}"
 }
@@ -176,10 +183,10 @@ export PATH=$PATH:$HOME/.pulumi/bin
 bindkey -M vicmd 'yy' zsh-system-clipboard-vicmd-vi-yank-whole-line
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/cdiaz/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/cdiaz/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/cdiaz/.local/share/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/cdiaz/.local/share/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/cdiaz/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/cdiaz/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/Users/cdiaz/.local/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/cdiaz/.local/share/google-cloud-sdk/completion.zsh.inc'; fi
 
 # Created by `pipx` on 2025-12-01 16:07:36
 export PATH="$PATH:/Users/cdiaz/.local/bin"

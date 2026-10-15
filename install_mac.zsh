@@ -62,11 +62,14 @@ fi
 
 # --- Cloud tooling -----------------------------------------------------------
 # .zshrc sources path.zsh.inc and completion.zsh.inc from this directory.
-if [[ ! -d ~/Downloads/google-cloud-sdk ]]; then
+if [[ ! -d ~/.local/share/google-cloud-sdk ]]; then
+  mkdir -p ~/.local/share
   curl -fsSL -o "$TMPDIR/gcloud.tar.gz" \
     https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-darwin-arm.tar.gz
-  tar -xf "$TMPDIR/gcloud.tar.gz" -C ~/Downloads
-  ~/Downloads/google-cloud-sdk/install.sh --quiet
+  tar -xf "$TMPDIR/gcloud.tar.gz" -C ~/.local/share
+  # .zshrc already sources path.zsh.inc and completion.zsh.inc, so the
+  # installer must not append its own copies of those lines.
+  ~/.local/share/google-cloud-sdk/install.sh --quiet --path-update false --command-completion false
 fi
 
 command -v rclone >/dev/null || { sudo -v; curl https://rclone.org/install.sh | sudo bash; }
