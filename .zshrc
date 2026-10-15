@@ -43,8 +43,23 @@ export PULUMI_SELF_MANAGED_STATE_GZIP=true
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 # Zsh Git Super Status to Show Branch State in Terminal
-source ~/.zsh/zsh-git-prompt/zshrc.sh
-PROMPT='%B%m%~%b$(git_super_status) %# '
+# Git branch and status in the prompt, from oh-my-zsh's git library.
+# zsh-git-prompt needed `python`, which macOS does not have.
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{cyan}("
+ZSH_THEME_GIT_PROMPT_SUFFIX="%F{cyan})%f"
+ZSH_THEME_GIT_PROMPT_CLEAN=" %F{green}✔"
+ZSH_THEME_GIT_PROMPT_DIRTY=""
+ZSH_THEME_GIT_PROMPT_ADDED="%F{green}+"
+ZSH_THEME_GIT_PROMPT_MODIFIED="%F{yellow}✚"
+ZSH_THEME_GIT_PROMPT_DELETED="%F{red}✖"
+ZSH_THEME_GIT_PROMPT_RENAMED="%F{blue}➜"
+ZSH_THEME_GIT_PROMPT_UNMERGED="%F{red}✗"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{red}…"
+ZSH_THEME_GIT_PROMPT_STASHED="%F{blue}⚑"
+ZSH_THEME_GIT_PROMPT_AHEAD="%F{cyan}↑"
+ZSH_THEME_GIT_PROMPT_BEHIND="%F{cyan}↓"
+ZSH_THEME_GIT_PROMPT_DIVERGED="%F{magenta}↕"
+PROMPT='%B%m%~%b$(git_prompt_info)$(git_prompt_status)%f %# '
 
 export GPG_TTY=$(tty)
 
@@ -94,7 +109,6 @@ export ATLASSIAN_API_TOKEN="$(security find-generic-password -a "$USER" -s atlas
 alias ls="eza"
 alias dk="docker"
 alias preview="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
-alias fd="fdfind"
 alias safegit="git config --system --add safe.directory"
 alias g="git"
 alias l="eza"
@@ -144,10 +158,17 @@ batdiff() {
 
 # Rgrep and Fzf
 
-rgrep() { rg --line-number --with-filename . --color=always --field-match-separator ' ' \
-| fzf --ansi --preview "bat --color=always {1} --highlight-line {2}" \
-      --preview-window ~8,+{2}-5
-    }
+# Fuzzy-search every line under the current directory, including dotfiles, with a bat preview.
+# An optional argument narrows the search to lines that match that regex first.
+# Enter opens the selected line in nvim.
+vgrep() {
+  local match
+  match=$(rg --hidden --glob '!.git/' --line-number --with-filename --color=always --field-match-separator ' ' "${1:-.}" \
+    | fzf --ansi --preview 'bat --color=always {1} --highlight-line {2}' \
+          --preview-window '~8,+{2}-5') || return
+  nvim "+${${match#* }%% *}" "${match%% *}"
+}
+alias rgrep=vgrep
 # add Pulumi to the PATH
 export PATH=$PATH:$HOME/.pulumi/bin
 

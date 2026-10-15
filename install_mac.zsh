@@ -68,6 +68,9 @@ https://filezilla-project.org/download.php?platform=macos-arm64#close
 # Install fzf
 brew install fzf
 
+# Install ripgrep (rg), used by vgrep in .zshrc
+brew install ripgrep
+
 # Install autojump
 brew install autojump
 
